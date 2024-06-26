@@ -17,6 +17,10 @@ class AppImages {
   static const String offers = '$imagePath/offers.png';
   static const String menu = '$imagePath/menu.png';
   static const String plus = '$imagePath/plus.png';
+  static const String location = '$imagePath/location.png';
+  static const String notification = '$imagePath/notification.png';
+  static const String search = '$imagePath/search.png';
+  static const String bluePlus = '$imagePath/bluePlus.png';
 
   // icons
   static const String close = '$iconsPath/close.svg';

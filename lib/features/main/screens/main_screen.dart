@@ -84,7 +84,7 @@ class _MainScreenState extends State<MainScreen> {
                     color: Colors.transparent,
                     // margin: EdgeInsets.all(0),
                     child: FloatingNavbar(
-                      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 3),
+                      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
                       margin: EdgeInsets.all(0),
 
                       borderRadius: MediaQuery.of(context).size.width / 4,
@@ -97,7 +97,7 @@ class _MainScreenState extends State<MainScreen> {
                       items: [
                         FloatingNavbarItem(
                             customWidget: Padding(
-                          padding: EdgeInsets.all(2),
+                          padding: EdgeInsets.all(2.h),
                           child: _index == 0
                               ? Container(
                                   decoration: BoxDecoration(
@@ -106,32 +106,31 @@ class _MainScreenState extends State<MainScreen> {
                                         BorderRadius.all(Radius.circular(50)),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(5.h),
                                     child: Image.asset(
                                       AppImages.home,
                                       color: AppColors.primary,
-                                      width: MediaQuery.of(context).size.width /
-                                          14,
-                                      height:
-                                          MediaQuery.of(context).size.width /
-                                              14,
+                                      width: 21.h,
+                                      height: 21.h,
                                     ),
                                   ),
                                 )
-                              : Image.asset(
-                                  AppImages.home,
-                                  color: AppColors.white,
-                                  width: MediaQuery.of(context).size.width / 14,
-                                  height:
-                                      MediaQuery.of(context).size.width / 14,
+                              : Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                                  child: Image.asset(
+                                    AppImages.home,
+                                    color: AppColors.white,
+                                    width: 21.h,
+                                    height: 21.h,
+                                  ),
                                 ),
                         )),
                         FloatingNavbarItem(
                             customWidget: Padding(
-                          padding: EdgeInsets.all(2),
+                          padding: EdgeInsets.all(2.h),
                           child: _index == 1
                               ? Padding(
-                                  padding: const EdgeInsets.only(left: 50.0),
+                                  padding: EdgeInsets.only(left: 20.w),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: AppColors.white,
@@ -139,38 +138,32 @@ class _MainScreenState extends State<MainScreen> {
                                           BorderRadius.all(Radius.circular(50)),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: EdgeInsets.all(5.h),
                                       child: Image.asset(
                                         AppImages.orders,
                                         color: AppColors.primary,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                14,
-                                        height:
-                                            MediaQuery.of(context).size.width /
-                                                14,
+                                        width: 21.h,
+                                        height: 21.h,
                                       ),
                                     ),
                                   ),
                                 )
                               : Padding(
-                                  padding: const EdgeInsets.only(left: 50.0),
+                                  padding: EdgeInsets.only(left: 20.w),
                                   child: Image.asset(
                                     AppImages.orders,
                                     color: AppColors.white,
-                                    width:
-                                        MediaQuery.of(context).size.width / 14,
-                                    height:
-                                        MediaQuery.of(context).size.width / 14,
+                                    width: 21.h,
+                                    height: 21.h,
                                   ),
                                 ),
                         )),
                         FloatingNavbarItem(
                             customWidget: Padding(
-                          padding: EdgeInsets.all(2),
+                          padding: EdgeInsets.all(2.h),
                           child: _index == 2
                               ? Padding(
-                                  padding: const EdgeInsets.only(right: 50.0),
+                                  padding: EdgeInsets.only(right: 20.w),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: AppColors.white,
@@ -178,35 +171,29 @@ class _MainScreenState extends State<MainScreen> {
                                           BorderRadius.all(Radius.circular(50)),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: EdgeInsets.all(5.h),
                                       child: Image.asset(
                                         AppImages.offers,
                                         color: AppColors.primary,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                14,
-                                        height:
-                                            MediaQuery.of(context).size.width /
-                                                14,
+                                        width: 21.h,
+                                        height: 21.h,
                                       ),
                                     ),
                                   ),
                                 )
                               : Padding(
-                                  padding: const EdgeInsets.only(right: 50.0),
+                                  padding: EdgeInsets.only(right: 20.w),
                                   child: Image.asset(
                                     AppImages.offers,
                                     color: AppColors.white,
-                                    width:
-                                        MediaQuery.of(context).size.width / 15,
-                                    height:
-                                        MediaQuery.of(context).size.width / 15,
+                                    width: 21.h,
+                                    height: 21.h,
                                   ),
                                 ),
                         )),
                         FloatingNavbarItem(
                             customWidget: Padding(
-                          padding: EdgeInsets.all(2),
+                          padding: EdgeInsets.all(2.h),
                           child: _index == 3
                               ? Container(
                                   decoration: BoxDecoration(
@@ -215,24 +202,20 @@ class _MainScreenState extends State<MainScreen> {
                                         BorderRadius.all(Radius.circular(50)),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(5.h),
                                     child: Image.asset(
                                       AppImages.menu,
                                       color: AppColors.primary,
-                                      width: MediaQuery.of(context).size.width /
-                                          14,
-                                      height:
-                                          MediaQuery.of(context).size.width /
-                                              14,
+                                      width: 21.h,
+                                      height: 21.h,
                                     ),
                                   ),
                                 )
                               : Image.asset(
                                   AppImages.menu,
                                   color: AppColors.white,
-                                  width: MediaQuery.of(context).size.width / 14,
-                                  height:
-                                      MediaQuery.of(context).size.width / 14,
+                                  width: 21.h,
+                                  height: 21.h,
                                 ),
                         )),
                       ],

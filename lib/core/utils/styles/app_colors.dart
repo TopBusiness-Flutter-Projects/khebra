@@ -7,9 +7,13 @@ class AppColors {
   static Color secondPrimary = HexColor('#10275C');
   static Color primaryText = HexColor('#272727');
   static Color primaryHint = HexColor('#B2B2B2');
+  static Color textColor2 = HexColor('#362C29');
   static Color grey = HexColor('#747474');
   static Color grey2 = HexColor('#205960');
   static Color grey3 = HexColor('#767676');
+    static Color secondTextColor = HexColor('#373737');
+    static Color dotsColor = HexColor('#F5F5F5');
+
   static Color notificationFont = HexColor('#404040');
   static Color settingDivider = HexColor('#DADADA');
   static Color blue = HexColor('#110E43');
@@ -17,10 +21,9 @@ class AppColors {
   static Color indicatorBackground = HexColor('#D9D9D9');
   static Color settingFont = HexColor('#37474F');
   static Color logOutFont = HexColor('#BE3033');
-  static Color rewardColor = HexColor('#373737');
   static Color privacyDialogFont = HexColor('#4F4C6D');
   static Color overlayBackfround = HexColor('#FEE9C7');
-  static Color dotsColor = const Color(0xff10275C).withOpacity(.3);
+  //static Color dotsColor = const Color(0xff10275C).withOpacity(.3);
   static Color greyBackground = const Color(0x42FCAB26);
   static Color blackText = HexColor('#110101');
   static Color orange = HexColor('#FF7A00');

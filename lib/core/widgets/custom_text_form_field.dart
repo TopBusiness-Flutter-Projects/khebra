@@ -12,6 +12,7 @@ class CustomTextField extends StatefulWidget {
   final String? initialValue;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final double? borderRadius;
 
   final bool isMessage;
   final bool isPassword;
@@ -33,7 +34,7 @@ class CustomTextField extends StatefulWidget {
     this.onChanged,
     this.onTap,
     this.isPassword = false,
-    this.onSubmitted,
+    this.onSubmitted, this.borderRadius,
   });
 
   @override
@@ -102,20 +103,20 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 enabledBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(color: AppColors.primaryHint, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
+                    borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius??8))),
 
                 // focused border style
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.primary, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
+                    borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius??8))),
 
                 // error border style
                 errorBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.red, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(8))),
+                    borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius??8))),
                 focusedErrorBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.red, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(8))))),
+                    borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius??8))))),
       ),
     );
   }
