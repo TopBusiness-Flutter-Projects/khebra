@@ -26,6 +26,7 @@ import 'package:khebra/features/login/cubit/login_cubit.dart';
 import 'package:khebra/features/login/cubit/login_states.dart';
 import '../../../core/widgets/custom_button.dart';
 import 'widgets/custom_category_section.dart';
+import 'widgets/custom_technicians_section.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -194,53 +195,32 @@ class _HomeScreenState extends State<HomeScreen> {
                             //         ))
                             //     .toList(),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomHomeText(
-                                  text: "categories",
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Text(
-                                    "all".tr(),
-                                    style: getRegularStyle(
-                                        color: AppColors.primary,
-                                        fontSize: 18.sp),
-                                  ),
-                                ),
-                              ],
-                            ),
+                          CustomHomeTitles(
+                            text: "categories",
+                            onTap: () => Navigator.pushNamed(
+                                context, Routes.categoriesRoute),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: CategoriesSection(),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomHomeText(
-                                  text: "services",
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Text(
-                                    "all".tr(),
-                                    style: getRegularStyle(
-                                        color: AppColors.primary,
-                                        fontSize: 18.sp),
-                                  ),
-                                ),
-                              ],
-                            ),
+                          CustomHomeTitles(
+                            text: "services",
+                            onTap: () => Navigator.pushNamed(
+                                context, Routes.servicesRoute),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: ServiciesSection(),
+                          ),
+                          CustomHomeTitles(
+                            text: "besTechnicians",
+                            onTap: () => Navigator.pushNamed(
+                                context, Routes.techniciansRoute),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: TechniciansSection(),
                           ),
                         ]),
                   ),
@@ -250,6 +230,37 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         );
       }),
+    );
+  }
+}
+
+class CustomHomeTitles extends StatelessWidget {
+  const CustomHomeTitles({
+    super.key,
+    this.onTap,
+    required this.text,
+  });
+  final void Function()? onTap;
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CustomHomeText(
+            text: text,
+          ),
+          GestureDetector(
+            onTap: onTap,
+            child: Text(
+              "all".tr(),
+              style: getRegularStyle(color: AppColors.primary, fontSize: 18.sp),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

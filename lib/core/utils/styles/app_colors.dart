@@ -8,6 +8,8 @@ class AppColors {
   static Color primaryText = HexColor('#272727');
   static Color primaryHint = HexColor('#B2B2B2');
   static Color textColor2 = HexColor('#362C29');
+  static Color appBarText = HexColor('#525252');
+  static Color menuTextColor = HexColor('#545454');
   static Color grey = HexColor('#747474');
   static Color grey2 = HexColor('#205960');
   static Color grey3 = HexColor('#767676');

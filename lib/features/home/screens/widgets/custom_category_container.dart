@@ -8,18 +8,16 @@ import '../../../../core/utils/styles/app_colors.dart';
 import '../../../../core/utils/styles/app_fonts.dart';
 import '../../../../core/widgets/custom_svg.dart';
 
-class CustomContainer extends StatelessWidget {
-  const CustomContainer({
+class CustomCategoriesContainer extends StatelessWidget {
+  const CustomCategoriesContainer({
     super.key,
     required this.mainText,
     this.containerOnTap,
-    
   });
 
   final void Function()? containerOnTap;
 
   final String mainText;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +40,7 @@ class CustomContainer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-               CustomNetworkImage(
+              CustomNetworkImage(
                 imageUrl: AppStrings.testNetworkImage,
                 height: 50.h,
                 width: 50.h,

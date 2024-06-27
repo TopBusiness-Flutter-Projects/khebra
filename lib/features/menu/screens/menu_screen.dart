@@ -2,6 +2,7 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/easy_localization.dart' as easy;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,10 @@ import 'package:khebra/features/home/cubit/home_cubit.dart';
 import 'package:khebra/features/home/cubit/home_states.dart';
 import 'package:khebra/features/login/cubit/login_cubit.dart';
 import 'package:khebra/features/login/cubit/login_states.dart';
+import 'package:khebra/features/menu/cubit/menu_cubit.dart';
+import 'package:khebra/features/menu/cubit/menu_states.dart';
+import 'package:khebra/features/menu/screens/widgets/custom_header_widget.dart';
+import 'package:khebra/features/menu/screens/widgets/custom_settings_widget.dart';
 import '../../../core/widgets/custom_button.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -26,10 +31,6 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  TextEditingController searchController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -38,8 +39,8 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocBuilder<HomeCubit, HomeStates>(builder: (context, state) {
-        HomeCubit cubit = context.read<HomeCubit>();
+      child: BlocBuilder<MenuCubit, MenuStates>(builder: (context, state) {
+        MenuCubit cubit = context.read<MenuCubit>();
 
         return Scaffold(
           body: Padding(
@@ -47,35 +48,37 @@ class _MenuScreenState extends State<MenuScreen> {
             child: Column(
               children: [
                 Expanded(
-                  child: Form(
-                    key: formKey,
-                    child: SingleChildScrollView(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(18.h),
-                              child: Text(
-                                "القائمة".tr(),
-                                style: getBoldStyle(fontSize: 20.sp),
-                              ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(18.h),
+                            child: Text(
+                              "menu".tr(),
+                              style: getBoldStyle(fontSize: 20.sp),
                             ),
-                            SizedBox(
-                              height: 15.h,
-                            ),
-                            CustomText(text: "البحث"),
-                            CustomTextField(
-                              labelText: 'ابحث'.tr(),
-                              keyboardType: TextInputType.text,
-                              controller: searchController,
-                              validator: (value) => value!.isEmpty ? '' : null,
-                            ),
-                            SizedBox(
-                              height: 35.h,
-                            ),
-                          ]),
-                    ),
+                          ),
+                          CustomHeaderWidget(text: "myInformation"),
+                          CustomSettingsRow(
+                            text: "profile",
+                            icon: AppIcons.profileIcon,
+                          ),
+                          CustomSettingsRow(
+                            text: "profile",
+                            icon: AppIcons.profileIcon,
+                          ),
+                          CustomSettingsRow(
+                            text: "profile",
+                            icon: AppIcons.profileIcon,
+                          ),
+                          CustomSettingsRow(
+                            text: "profile",
+                            icon: AppIcons.profileIcon,
+                          ),
+                          CustomHeaderWidget(text: "settings"),
+                        ]),
                   ),
                 ),
                 // Image.asset(

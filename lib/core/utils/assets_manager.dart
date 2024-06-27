@@ -21,13 +21,30 @@ class AppImages {
   static const String notification = '$imagePath/notification.png';
   static const String search = '$imagePath/search.png';
   static const String bluePlus = '$imagePath/bluePlus.png';
+  static const String filter = '$imagePath/filter.png';
 
-  // icons
-  static const String close = '$iconsPath/close.svg';
+
 
   // static const String phoneIcon = '$iconsPath/phone.svg';
 
   //Lottie
 
   // static const String noItems = '$lottiePath/no_item.json';
+}
+
+class AppIcons {
+  
+  static const String aboutAppIcon = '$iconsPath/aboutAppIcon.png';
+  static const String addProjectIcon = '$iconsPath/addProjectIcon.png';
+  static const String callUsIcon = '$iconsPath/callUsIcon.png';
+  static const String favouriteIcon = '$iconsPath/favouriteIcon.png';
+  static const String languageIcon = '$iconsPath/languageIcon.png';
+  static const String notificationIcon = '$iconsPath/notificationIcon.png';
+  static const String policyIcon = '$iconsPath/policyIcon.png';
+  static const String profileIcon = '$iconsPath/profileIcon.png';
+  static const String rateAppIcon = '$iconsPath/rateAppIcon.png';
+  static const String shareIcon = '$iconsPath/shareIcon.png';
+  static const String subscribeAppIcon = '$iconsPath/subscribeAppIcon.png';
+  static const String themeIcon = '$iconsPath/themeIcon.png';
+  static const String whatsAppIcon = '$iconsPath/whatsAppIcon.png';
 }

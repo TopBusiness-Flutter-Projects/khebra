@@ -10,6 +10,13 @@ class HomeCubit extends Cubit<HomeStates> {
   HomeCubit(this.api) : super(HomeInitialState());
   ServiceApi api;
 
+  bool withPriceType = true;
+  void changeServicesType(bool priceType) {
+    withPriceType = priceType;
+    emit(ChangeServicesTypeStates());
+  }
+
+
   // addMember({
   //   required BuildContext context,
   //   String? position,

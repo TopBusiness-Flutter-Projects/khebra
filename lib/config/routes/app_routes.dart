@@ -3,9 +3,13 @@ import 'package:khebra/features/forgetPassword/screens/forget_password_screen.da
 import 'package:khebra/features/forgetPassword/screens/new_password_screen.dart';
 import 'package:khebra/features/forgetPassword/screens/otp_screen.dart';
 import 'package:khebra/features/home/cubit/home_cubit.dart';
+import 'package:khebra/features/home/screens/categories_screen.dart';
 import 'package:khebra/features/home/screens/home_screen.dart';
+import 'package:khebra/features/home/screens/servicies_screen.dart';
+import 'package:khebra/features/home/screens/technicians_screen.dart';
 import 'package:khebra/features/login/screens/login_screen.dart';
 import 'package:khebra/features/main/screens/main_screen.dart';
+import 'package:khebra/features/offers/screens/offer_details.dart';
 import 'package:khebra/features/onboarding/screens/onboard_screen.dart';
 import 'package:khebra/features/order_service/screens/order_service_screen.dart';
 import 'package:khebra/features/register/cubit/register_cubit.dart';
@@ -21,10 +25,14 @@ class Routes {
   static const String registerRoute = '/register';
   static const String orderService = '/orderService';
   static const String mainRoute = '/main';
+  static const String servicesRoute = '/services';
+  static const String techniciansRoute = '/technicians';
+  static const String categoriesRoute = '/categories';
   static const String notificationDetailsRoute = '/notificationDetails';
   static const String otpScreenRoute = '/otpScreen';
   static const String forgetPasswordScreenRoute = '/forgetPasswordScreen';
   static const String newPasswordScreenRoute = '/newPasswordScreen';
+  static const String offerDetailsRoute = '/offerDetails';
   static const String googleMapScreenRoute = '/googleMapScreen';
   static const String favoriteRoute = '/favorite';
   static const String fullScreenImageRoute = '/fullScreenImageRoute';
@@ -77,6 +85,22 @@ class AppRoutes {
       case Routes.orderService:
         return MaterialPageRoute(
           builder: (context) => const OrderServiceScreen(),
+        );
+      case Routes.servicesRoute:
+        return MaterialPageRoute(
+          builder: (context) => const ServicesScreen(),
+        );
+      case Routes.categoriesRoute:
+        return MaterialPageRoute(
+          builder: (context) => const CategoriesScreen(),
+        );
+      case Routes.techniciansRoute:
+        return MaterialPageRoute(
+          builder: (context) => const TechniciansScreen(),
+        );
+      case Routes.offerDetailsRoute:
+        return MaterialPageRoute(
+          builder: (context) => const OfferDetailsScreen(),
         );
 
       default:

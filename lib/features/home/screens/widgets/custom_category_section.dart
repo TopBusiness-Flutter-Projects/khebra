@@ -15,39 +15,22 @@ class CategoriesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StaggeredGrid.count(
-      crossAxisCount: 3,
-      mainAxisSpacing: 5.w,
-      crossAxisSpacing: 5.w,
-      //   GridView.count(
-      // shrinkWrap: true,
-      // physics: const NeverScrollableScrollPhysics(),
-      // crossAxisCount: 4,
-      // mainAxisSpacing: 5.w,
-      // crossAxisSpacing: 5.w,
-      // childAspectRatio: 1 / 2,
-      children: [
-        CustomContainer(
-          
-          containerOnTap: () {},
-          mainText: "AppStrings.collectPoints",
-        ),
-        CustomContainer(
-         
-          containerOnTap: () {},
-          mainText: "AppStrings.collectPoints",
-        ),
-        CustomContainer(
-          
-          containerOnTap: () {},
-          mainText: "AppStrings.collectPoints",
-        ),
-        CustomContainer(
-         
-          containerOnTap: () {},
-          mainText: "AppStrings.collectPoints",
-        ),
-        
-      ],
-    );
+        crossAxisCount: 3,
+        mainAxisSpacing: 5.w,
+        crossAxisSpacing: 5.w,
+        //   GridView.count(
+        // shrinkWrap: true,
+        // physics: const NeverScrollableScrollPhysics(),
+        // crossAxisCount: 4,
+        // mainAxisSpacing: 5.w,
+        // crossAxisSpacing: 5.w,
+        // childAspectRatio: 1 / 2,
+        children: List.generate(
+          6,
+          (index) => CustomCategoriesContainer(
+            containerOnTap: () {},
+            mainText: "AppStrings.collectPoints",
+          ),
+        ));
   }
 }

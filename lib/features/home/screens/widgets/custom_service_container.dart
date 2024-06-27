@@ -16,11 +16,15 @@ class CustomServiceContainer extends StatelessWidget {
     super.key,
     required this.mainText,
     this.containerOnTap,
+    this.onTap,
+    this.withPrice = false,
   });
 
   final void Function()? containerOnTap;
+  final void Function()? onTap;
 
   final String mainText;
+  final bool withPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +47,12 @@ class CustomServiceContainer extends StatelessWidget {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CustomNetworkImage(
                 imageUrl: AppStrings.sliderTestImage,
                 height: 100.h,
-                width: 120.h,
+                // width: 120.h,
               ),
               SizedBox(
                 height: 5.h,
@@ -88,41 +92,56 @@ class CustomServiceContainer extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4.h),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: RichText(
-                        maxLines: 2,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                                text: "200",
-                                style: getBoldStyle(
-                                    fontSize: 15.sp, color: AppColors.primary)),
-                            TextSpan(
-                                text: ' ',
-                                style: getBoldStyle(
-                                    fontSize: 15.sp, color: AppColors.primary)),
-                            TextSpan(
-                                text: "ريال" "\n",
-                                style: getRegularStyle(
-                                    fontSize: 15.sp, color: AppColors.primary)),
-                          ],
+                child: withPrice
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: RichText(
+                              maxLines: 2,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                      text: "200",
+                                      style: getBoldStyle(
+                                          fontSize: 15.sp,
+                                          color: AppColors.primary)),
+                                  TextSpan(
+                                      text: ' ',
+                                      style: getBoldStyle(
+                                          fontSize: 15.sp,
+                                          color: AppColors.primary)),
+                                  TextSpan(
+                                      text: "ريال" "\n",
+                                      style: getRegularStyle(
+                                          fontSize: 15.sp,
+                                          color: AppColors.primary)),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 3.w,
+                          ),
+                          GestureDetector(
+                            onTap: onTap,
+                            child: Image.asset(
+                              AppImages.bluePlus,
+                              height: 20.w,
+                              width: 20.w,
+                            ),
+                          ),
+                        ],
+                      )
+                    : GestureDetector(
+                        onTap: onTap,
+                        child: Image.asset(
+                          AppImages.bluePlus,
+                          height: 20.w,
+                          width: 20.w,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 3.w,
-                    ),
-                    Image.asset(
-                      AppImages.bluePlus,
-                      height: 20.w,
-                      width: 20.w,
-                    ),
-                  ],
-                ),
               ),
             ],
           ),

@@ -25,6 +25,19 @@ TextStyle getLightStyle({Color? color, double? fontHeight, double? fontSize}) {
       fontHeight: fontHeight);
 }
 
+TextStyle getLineOverStyle({bool isBold = true}) {
+  return TextStyle(
+    decoration: TextDecoration.lineThrough,
+    decorationColor: AppColors.primary,
+    height: 2,
+    decorationThickness: 15,
+    fontSize: 16.sp,
+    fontFamily: AppStrings.fontFamily,
+    color: AppColors.primary,
+    fontWeight: isBold ? FontWeight.w700 : FontWeight.w500,
+  );
+}
+
 // regular style 400
 TextStyle getRegularStyle(
     {Color? color, double? fontHeight, double? fontSize}) {

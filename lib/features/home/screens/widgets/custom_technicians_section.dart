@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:khebra/features/home/screens/widgets/custom_technicians_container.dart';
 
 import 'custom_service_container.dart';
 
-class ServiciesSection extends StatelessWidget {
-  const ServiciesSection({
+class TechniciansSection extends StatelessWidget {
+  const TechniciansSection({
     super.key,
   });
 
@@ -16,7 +17,7 @@ class ServiciesSection extends StatelessWidget {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) => CustomServiceContainer(
+          itemBuilder: (context, index) => CustomTechniciansContainer(
                 mainText: "AppStringsAppStringsAppStrings",
                 containerOnTap: () {},
               ),

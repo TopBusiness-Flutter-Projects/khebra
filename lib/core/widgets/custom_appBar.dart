@@ -1,39 +1,46 @@
-// import 'package:flutter/material.dart';
-// import 'package:khebra/core/widgets/custom_points_text.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:khebra/core/utils/styles/app_colors.dart';
+import 'package:khebra/core/utils/styles/app_fonts.dart';
 
-// import '../utils/app_const.dart';
-// import '../utils/custom_svg_icon.dart';
-// import '../utils/styles/app_colors.dart';
-// import '../utils/styles/app_fonts.dart';
-
-// class CustomAppBar extends StatelessWidget {
-//   const CustomAppBar({
-//     super.key,
-//     required this.text,
-//     this.withPoints = false,
-//     this.onTap,
-//   });
-//   final String text;
-//   final bool? withPoints;
-//   final void Function()? onTap;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       children: [
-//         GestureDetector(
-//             onTap: onTap ?? () => Navigator.pop(context),
-//             child: AppIcons.arrowBack),
-//         const SizedBox(
-//           width: AppConstants.sizedBoxWidth,
-//         ),
-//         Text(
-//           text,
-//           style: getBoldStyle(color: AppColors.blackText, fontSize: 20),
-//         ),
-//         Spacer(),
-//         if (withPoints!) CustomPointsText()
-//       ],
-//     );
-//   }
-// }
+class CustomAppBar extends StatelessWidget {
+  const CustomAppBar({
+    super.key,
+    required this.title,
+    this.onPressed,
+  });
+  final String title;
+  final void Function()? onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 18.h,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          IconButton(
+              onPressed: onPressed ??
+                  () {
+                    Navigator.pop(context);
+                  },
+              icon: Icon(
+                Icons.arrow_back,
+                size: 20.h,
+                
+                color: AppColors.appBarText,
+              )),
+          Text(
+            title.tr(),
+            style: getBoldStyle(
+              fontSize: 20.sp,
+              color: AppColors.appBarText,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
