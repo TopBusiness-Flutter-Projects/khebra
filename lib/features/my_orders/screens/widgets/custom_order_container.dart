@@ -83,6 +83,29 @@ class CustomOrderContainer extends StatelessWidget {
                       SizedBox(
                         height: 10.h,
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomInfoRow(
+                              path: AppIcons.orderTotal, text: "total".tr()),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Row(
+                              children: [
+                                Text(
+                                  'details'.tr(),
+                                  style: getBoldStyle(color: AppColors.primary),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_sharp,
+                                  color: AppColors.primary,
+                                  size: 22.w,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                       isCurrent ? Text("current") : Text("done")
                     ],
                   )
