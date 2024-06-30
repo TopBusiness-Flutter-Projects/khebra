@@ -130,7 +130,19 @@ class _MainScreenState extends State<MainScreen> {
                           padding: EdgeInsets.all(2.h),
                           child: _index == 1
                               ? Padding(
-                                  padding: EdgeInsets.only(left: 20.w),
+                                  padding: EdgeInsets.only(
+                                      left: EasyLocalization.of(context)!
+                                                  .locale
+                                                  .languageCode ==
+                                              'ar'
+                                          ? 20.w
+                                          : 0,
+                                      right: EasyLocalization.of(context)!
+                                                  .locale
+                                                  .languageCode ==
+                                              'ar'
+                                          ? 0
+                                          : 20.w),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: AppColors.white,
@@ -149,7 +161,19 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                                 )
                               : Padding(
-                                  padding: EdgeInsets.only(left: 20.w),
+                                  padding: EdgeInsets.only(
+                                      left: EasyLocalization.of(context)!
+                                                  .locale
+                                                  .languageCode ==
+                                              'ar'
+                                          ? 20.w
+                                          : 0,
+                                      right: EasyLocalization.of(context)!
+                                                  .locale
+                                                  .languageCode ==
+                                              'ar'
+                                          ? 0
+                                          : 20.w),
                                   child: Image.asset(
                                     AppImages.orders,
                                     color: AppColors.white,
@@ -163,7 +187,19 @@ class _MainScreenState extends State<MainScreen> {
                           padding: EdgeInsets.all(2.h),
                           child: _index == 2
                               ? Padding(
-                                  padding: EdgeInsets.only(right: 20.w),
+                                  padding: EdgeInsets.only(
+                                      left: EasyLocalization.of(context)!
+                                                  .locale
+                                                  .languageCode !=
+                                              'ar'
+                                          ? 20.w
+                                          : 0,
+                                      right: EasyLocalization.of(context)!
+                                                  .locale
+                                                  .languageCode !=
+                                              'ar'
+                                          ? 0
+                                          : 20.w),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: AppColors.white,
@@ -182,7 +218,19 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                                 )
                               : Padding(
-                                  padding: EdgeInsets.only(right: 20.w),
+                                  padding: EdgeInsets.only(
+                                      left: EasyLocalization.of(context)!
+                                                  .locale
+                                                  .languageCode !=
+                                              'ar'
+                                          ? 20.w
+                                          : 0,
+                                      right: EasyLocalization.of(context)!
+                                                  .locale
+                                                  .languageCode !=
+                                              'ar'
+                                          ? 0
+                                          : 20.w),
                                   child: Image.asset(
                                     AppImages.offers,
                                     color: AppColors.white,

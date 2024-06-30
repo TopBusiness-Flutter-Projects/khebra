@@ -23,8 +23,6 @@ class AppImages {
   static const String bluePlus = '$imagePath/bluePlus.png';
   static const String filter = '$imagePath/filter.png';
 
-
-
   // static const String phoneIcon = '$iconsPath/phone.svg';
 
   //Lottie
@@ -33,7 +31,6 @@ class AppImages {
 }
 
 class AppIcons {
-  
   static const String aboutAppIcon = '$iconsPath/aboutAppIcon.png';
   static const String addProjectIcon = '$iconsPath/addProjectIcon.png';
   static const String callUsIcon = '$iconsPath/callUsIcon.png';
@@ -44,7 +41,18 @@ class AppIcons {
   static const String profileIcon = '$iconsPath/profileIcon.png';
   static const String rateAppIcon = '$iconsPath/rateAppIcon.png';
   static const String shareIcon = '$iconsPath/shareIcon.png';
-  static const String subscribeAppIcon = '$iconsPath/subscribeAppIcon.png';
+  static const String subscribeAppIcon = '$iconsPath/subscribeIcon.png';
   static const String themeIcon = '$iconsPath/themeIcon.png';
   static const String whatsAppIcon = '$iconsPath/whatsAppIcon.png';
+  static const String logoutIcon = '$iconsPath/logoutIcon.png';
+  static const String call = '$iconsPath/call.png';
+  static const String orderDate = '$iconsPath/orderDate.png';
+  static const String orderDone = '$iconsPath/orderDone.png';
+  static const String orderNumber = '$iconsPath/orderNumber.png';
+  static const String orderTime = '$iconsPath/orderTime.png';
+  static const String orderTotal = '$iconsPath/orderTotal.png';
+  static const String waiting = '$iconsPath/waiting.png';
+  static const String whatsApp = '$iconsPath/whatsApp.png';
+
+
 }

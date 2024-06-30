@@ -10,13 +10,20 @@ import 'package:khebra/core/utils/assets_manager.dart';
 import 'package:khebra/core/utils/dialogs.dart';
 import 'package:khebra/core/utils/styles/app_colors.dart';
 import 'package:khebra/core/utils/styles/app_fonts.dart';
+import 'package:khebra/core/widgets/custom_appbar.dart';
+import 'package:khebra/core/widgets/custom_drop_down_menu.dart';
 import 'package:khebra/core/widgets/custom_text.dart';
 import 'package:khebra/core/widgets/custom_text_form_field.dart';
 import 'package:khebra/features/home/cubit/home_cubit.dart';
 import 'package:khebra/features/home/cubit/home_states.dart';
+import 'package:khebra/features/home/screens/widgets/custom_services_type_widget.dart';
 import 'package:khebra/features/login/cubit/login_cubit.dart';
 import 'package:khebra/features/login/cubit/login_states.dart';
+import 'package:khebra/features/my_orders/cubit/my_orders_cubit.dart';
+import 'package:khebra/features/my_orders/cubit/my_orders_states.dart';
+import 'package:khebra/features/my_orders/screens/widgets/custom_filter_drop_down_menu.dart';
 import '../../../core/widgets/custom_button.dart';
+import 'widgets/custom_order_container.dart';
 
 class MyOrdersScreen extends StatefulWidget {
   const MyOrdersScreen({Key? key}) : super(key: key);
@@ -38,52 +45,94 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocBuilder<HomeCubit, HomeStates>(builder: (context, state) {
-        HomeCubit cubit = context.read<HomeCubit>();
+      child:
+          BlocBuilder<MyOrdersCubit, MyOrdersStates>(builder: (context, state) {
+        MyOrdersCubit cubit = context.read<MyOrdersCubit>();
 
         return Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Form(
-                    key: formKey,
-                    child: SingleChildScrollView(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(18.h),
-                              child: Text(
-                                "طلباتي".tr(),
-                                style: getBoldStyle(fontSize: 20.sp),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15.h,
-                            ),
-                            CustomText(text: "البحث"),
-                            CustomTextField(
-                              labelText: 'ابحث'.tr(),
-                              keyboardType: TextInputType.text,
-                              controller: searchController,
-                              validator: (value) => value!.isEmpty ? '' : null,
-                            ),
-                            SizedBox(
-                              height: 35.h,
-                            ),
-                          ]),
-                    ),
-                  ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(18.h),
+                child: Text(
+                  "myOrders".tr(),
+                  style: getBoldStyle(fontSize: 20.sp),
                 ),
-                // Image.asset(
-                //   width: double.infinity,
-                //   AppImages.login,
-                // )
-              ],
-            ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: GestureDetector(
+                          onTap: () {
+                            cubit.changeOrderType(true);
+                            print(cubit.withPriceType);
+                          },
+                          child: ServicesType(
+                              departmentName: 'ordersWithOffers',
+                              isSelected: cubit.withPriceType)),
+                    ),
+                    Flexible(
+                      child: GestureDetector(
+                          onTap: () {
+                            cubit.changeOrderType(false);
+                            print(cubit.withPriceType);
+                          },
+                          child: ServicesType(
+                              departmentName: 'ordersWithoutOffers',
+                              isSelected: !cubit.withPriceType)),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.w),
+                child: CustomFilterDropDownMenu(
+                  dropdownValue: cubit.dropdownValue,
+                  onChanged: (String? value) {
+                    setState(() {
+                      cubit.dropdownValue = value!;
+                    });
+                  },
+                  text: "statusFilter".tr(),
+                  items: cubit.filters
+                      .map(
+                        (e) => DropdownMenuItem<String>(
+                          value: e.toString(),
+                          child: Text(e),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) =>
+                                CustomOrderContainer(
+                                  //orderModel: cubit
+                                  //    .getOrdersModel!
+                                  //    .data!
+                                  //    .old![index],
+                                  isCurrent: false,
+                                ),
+                            separatorBuilder: (context, index) => SizedBox(
+                                  height: 15.h,
+                                ),
+                            itemCount: 5)
+                      ]),
+                ),
+              ),
+            ],
           ),
         );
       }),

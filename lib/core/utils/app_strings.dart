@@ -12,4 +12,7 @@ class AppStrings {
   static const String serverFail = 'server_fail';
   static const String cacheFailure = 'Cache Failure';
   static const String unexpectedError = 'Unexpected Error';
+  static const String locale = 'locale';
+   static const String englishCode = 'en';
+  static const String arabicCode = 'ar';
 }

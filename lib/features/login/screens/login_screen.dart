@@ -125,7 +125,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.pushNamedAndRemoveUntil(context,
                                       Routes.mainRoute, (route) => false);
                                   if (formKey.currentState!.validate()) {
-                                  
                                   } else {
                                     errorGetBar("من فضلك املأ الحقول");
                                     print('Form is Not valid');
@@ -139,10 +138,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  "doNotHaveAccount".tr(),
-                                  style:
-                                      getRegularStyle(color: AppColors.black),
+                                Flexible(
+                                  child: Text(
+                                    "doNotHaveAccount".tr(),
+                                    style:
+                                        getRegularStyle(color: AppColors.black),
+                                  ),
                                 ),
                                 TextButton(
                                     onPressed: () {

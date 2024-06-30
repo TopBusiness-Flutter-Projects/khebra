@@ -7,3 +7,4 @@ class SuccessAddMemberState extends MyOrdersStates {}
 class FailureAddMemberState extends MyOrdersStates {}
 
 class LoadingAddMemberState extends MyOrdersStates {}
+class ChangeOrderTypeStates extends MyOrdersStates {}

@@ -28,7 +28,9 @@ class ServicesType extends StatelessWidget {
           child: Text(
             departmentName.tr(),
             maxLines: 2,
-            style: getRegularStyle(color: AppColors.white, fontHeight: 1),
+            textAlign: TextAlign.center,
+            style: getRegularStyle(
+                color: AppColors.white, fontHeight: 1, fontSize: 13.w),
           ),
         ));
   }

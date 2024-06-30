@@ -1,19 +1,17 @@
 import 'dart:convert';
 
-
+import 'package:khebra/core/utils/app_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-
 
 class Preferences {
   static SharedPreferences? sharedPreferences;
   static init() async {
     sharedPreferences = await SharedPreferences.getInstance();
   }
+
   static final Preferences instance = Preferences._internal();
   Preferences._internal();
   factory Preferences() => instance;
-
 
   ////notification
   bool notiSound = true;
@@ -64,8 +62,17 @@ class Preferences {
     }
     return notiLight;
   }
-  //////////////////////////////////
 
+  Future<String> getSavedLang() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(AppStrings.locale) ?? 'ar';
+  }
+
+  Future<void> savedLang(String local) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString(AppStrings.locale, local);
+  }
+  //////////////////////////////////
 
 // set user
   // Future<void> setUser(LoginModel loginResponse) async {
@@ -92,79 +99,79 @@ class Preferences {
   //   return userModel;
   // }
 
-
-  Future<void> clearShared()async{
+  Future<void> clearShared() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
   }
 
-  Future<bool?> getIsFirstTime({required String key}) async{
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      return  preferences.getBool(key);
-
+  Future<bool?> getIsFirstTime({required String key}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getBool(key);
   }
 
-  Future<dynamic> setIsFirstTime({required String key, required value}) async{
+  Future<dynamic> setIsFirstTime({required String key, required value}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return   preferences.setBool(key, value);
-
+    return preferences.setBool(key, value);
   }
 // user  token
 
-  Future<String?> getUserToken() async{
+  Future<String?> getUserToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return  preferences.getString('userToken');
+    return preferences.getString('userToken');
   }
 
-  Future<dynamic> setUserToken({required String value}) async{
+  Future<dynamic> setUserToken({required String value}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return   preferences.setString('userToken', value);
+    return preferences.setString('userToken', value);
   }
+
   Future<void> deleteUserToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.remove('userToken');
   }
-// user access token 
+// user access token
 
-Future<String?> getAccessToken() async{
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      return  preferences.getString('accessToken');
-  }
-
-  Future<dynamic> setAccessToken({required String value}) async{
+  Future<String?> getAccessToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return   preferences.setString('accessToken', value);
+    return preferences.getString('accessToken');
   }
+
+  Future<dynamic> setAccessToken({required String value}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.setString('accessToken', value);
+  }
+
   // Notification token
-  Future<String?> getNotificationToken() async{
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      return  preferences.getString('notificationToken');
-  }
-
-  Future<dynamic> setNotificationToken({required String value}) async{
+  Future<String?> getNotificationToken() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return   preferences.setString('notificationToken', value);
-  }
-  Future<bool?> getPrivacyAccepted() async{
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      return  preferences.getBool('privacyAccepted');
+    return preferences.getString('notificationToken');
   }
 
-  Future<dynamic> setPrivacyAccepted({required bool value}) async{
+  Future<dynamic> setNotificationToken({required String value}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return   preferences.setBool('privacyAccepted', value);
+    return preferences.setString('notificationToken', value);
   }
 
-// set point 
-
-Future<String?> getMyChannelId() async{
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      return  preferences.getString('channelId');
-  }
-
-  Future<dynamic> setMyChannelId({required String value}) async{
+  Future<bool?> getPrivacyAccepted() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return   preferences.setString('channelId', value);
+    return preferences.getBool('privacyAccepted');
+  }
+
+  Future<dynamic> setPrivacyAccepted({required bool value}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.setBool('privacyAccepted', value);
+  }
+
+// set point
+
+  Future<String?> getMyChannelId() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString('channelId');
+  }
+
+  Future<dynamic> setMyChannelId({required String value}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.setString('channelId', value);
   }
 //
 //
@@ -186,5 +193,4 @@ Future<String?> getMyChannelId() async{
   //   return sharedPreferences!.remove(key);
   // }
   //
-
 }
