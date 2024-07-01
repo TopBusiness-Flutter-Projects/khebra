@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:khebra/core/utils/styles/app_fonts.dart';
-
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -36,7 +36,7 @@ class CustomButton extends StatelessWidget {
           decoration: BoxDecoration(
               color: buttonColor,
               border: Border.all(color: borderColor ?? buttonColor),
-              borderRadius: BorderRadius.circular(20)),
+              borderRadius: BorderRadius.circular(50)),
           child: Align(
             alignment: Alignment.center,
             child: Row(
@@ -45,17 +45,19 @@ class CustomButton extends StatelessWidget {
                 path == null
                     ? Container()
                     : Image.asset(
-                         path!,width: 23.w,
-                         height: 23.w,                       
-                       
+                        path!,
+                        width: 23.w,
+                        height: 23.w,
                       ),
                 const SizedBox(
                   width: 10,
                 ),
-                Text(
-                  text,
-                  style: getRegularStyle(color: textColor),
-                ).tr(),
+                Flexible(
+                  child: Text(
+                    text,
+                    style: getRegularStyle(color: textColor),
+                  ).tr(),
+                ),
               ],
             ),
           ),

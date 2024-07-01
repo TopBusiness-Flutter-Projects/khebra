@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:khebra/config/routes/app_routes.dart';
 import 'package:khebra/core/utils/assets_manager.dart';
 import 'package:khebra/core/utils/styles/app_colors.dart';
 import 'package:khebra/core/utils/styles/app_fonts.dart';
@@ -71,13 +72,17 @@ class CustomOrderContainer extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          CustomInfoRow(
-                              path: AppIcons.orderDate, text: "30/2/2011"),
+                          Flexible(
+                            child: CustomInfoRow(
+                                path: AppIcons.orderDate, text: "30/2/2011"),
+                          ),
                           SizedBox(
                             width: 18.w,
                           ),
-                          CustomInfoRow(
-                              path: AppIcons.orderTime, text: "30:05 pm"),
+                          Flexible(
+                            child: CustomInfoRow(
+                                path: AppIcons.orderTime, text: "30:05 pm"),
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -86,27 +91,39 @@ class CustomOrderContainer extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomInfoRow(
-                              path: AppIcons.orderTotal, text: "total".tr()),
+                          Flexible(
+                            child: TotalRow(
+                                path: AppIcons.orderTotal, text: "600"),
+                          ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.orderDetailsRoute);
+                              print("Dsadsdsdsa");
+                            },
                             child: Row(
                               children: [
                                 Text(
                                   'details'.tr(),
-                                  style: getBoldStyle(color: AppColors.primary),
+                                  style: getBoldStyle(
+                                      color: AppColors.primary,
+                                      fontSize: 14.sp),
                                 ),
                                 Icon(
                                   Icons.arrow_forward_ios_sharp,
                                   color: AppColors.primary,
-                                  size: 22.w,
+                                  size: 18.w,
                                 ),
                               ],
                             ),
                           )
                         ],
                       ),
-                      isCurrent ? Text("current") : Text("done")
+                      isCurrent
+                          ? OrderStatusRow(
+                              isCurrent: true,
+                            )
+                          : OrderStatusRow(isCurrent: false)
                     ],
                   )
                 ],

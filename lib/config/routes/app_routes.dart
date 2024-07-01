@@ -9,9 +9,13 @@ import 'package:khebra/features/home/screens/servicies_screen.dart';
 import 'package:khebra/features/home/screens/technicians_screen.dart';
 import 'package:khebra/features/login/screens/login_screen.dart';
 import 'package:khebra/features/main/screens/main_screen.dart';
+import 'package:khebra/features/menu/screens/favourites_screen.dart';
+import 'package:khebra/features/my_orders/screens/order_details_screen.dart';
+import 'package:khebra/features/notifications/screens/notifications_screen.dart';
 import 'package:khebra/features/offers/screens/offer_details.dart';
 import 'package:khebra/features/onboarding/screens/onboard_screen.dart';
 import 'package:khebra/features/order_service/screens/order_service_screen.dart';
+import 'package:khebra/features/profile/screens/profile_screen.dart';
 import 'package:khebra/features/register/cubit/register_cubit.dart';
 import 'package:khebra/features/register/screens/register_screen.dart';
 import 'package:khebra/features/splash/screens/splash_screen.dart';
@@ -28,15 +32,17 @@ class Routes {
   static const String servicesRoute = '/services';
   static const String techniciansRoute = '/technicians';
   static const String categoriesRoute = '/categories';
-  static const String notificationDetailsRoute = '/notificationDetails';
+  static const String notificationRoute = '/notificationRoute';
   static const String otpScreenRoute = '/otpScreen';
   static const String forgetPasswordScreenRoute = '/forgetPasswordScreen';
   static const String newPasswordScreenRoute = '/newPasswordScreen';
   static const String offerDetailsRoute = '/offerDetails';
+  static const String orderDetailsRoute = '/orderDetails';
   static const String googleMapScreenRoute = '/googleMapScreen';
   static const String favoriteRoute = '/favorite';
   static const String fullScreenImageRoute = '/fullScreenImageRoute';
   static const String editProfileRoute = '/editProfile';
+  static const String profileRoute = '/profile';
   static const String allServicesRoute = '/allServices';
   static const String privacyRoute = '/privacy_about';
   static const String myPostsRoute = '/my_posts';
@@ -101,6 +107,22 @@ class AppRoutes {
       case Routes.offerDetailsRoute:
         return MaterialPageRoute(
           builder: (context) => const OfferDetailsScreen(),
+        );
+      case Routes.orderDetailsRoute:
+        return MaterialPageRoute(
+          builder: (context) => const OrderDetailsScreen(),
+        );
+      case Routes.notificationRoute:
+        return MaterialPageRoute(
+          builder: (context) => const NotificationsScreen(),
+        );
+      case Routes.favoriteRoute:
+        return MaterialPageRoute(
+          builder: (context) => const FavouritesScreen(),
+        );
+      case Routes.profileRoute:
+        return MaterialPageRoute(
+          builder: (context) => const ProfileScreen(),
         );
 
       default:

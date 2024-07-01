@@ -4,6 +4,7 @@ import 'package:khebra/features/login/cubit/login_cubit.dart';
 import 'package:khebra/features/main/cubit/main_cubit.dart';
 import 'package:khebra/features/menu/cubit/menu_cubit.dart';
 import 'package:khebra/features/my_orders/cubit/my_orders_cubit.dart';
+import 'package:khebra/features/notifications/cubit/notifications_cubit.dart';
 import 'package:khebra/features/offers/cubit/offers_cubit.dart';
 import 'package:khebra/features/onboarding/cubit/onboarding_cubit.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:khebra/features/order_service/cubit/order_service_cubit.dart';
+import 'package:khebra/features/profile/cubit/profile_cubit.dart';
 import 'package:khebra/features/register/cubit/register_cubit.dart';
 
 import 'config/routes/app_routes.dart';
@@ -76,6 +78,12 @@ class _KhebraAppState extends State<KhebraApp> {
                 ),
                 BlocProvider(
                   create: (_) => injector.serviceLocator<OrderServiceCubit>(),
+                ),
+                BlocProvider(
+                  create: (_) => injector.serviceLocator<NotificationsCubit>(),
+                ),
+                BlocProvider(
+                  create: (_) => injector.serviceLocator<ProfileCubit>(),
                 ),
               ],
               child: GetMaterialApp(

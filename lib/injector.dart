@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 
 import 'package:get_it/get_it.dart';
@@ -8,9 +7,11 @@ import 'package:khebra/features/login/cubit/login_cubit.dart';
 import 'package:khebra/features/main/cubit/main_cubit.dart';
 import 'package:khebra/features/menu/cubit/menu_cubit.dart';
 import 'package:khebra/features/my_orders/cubit/my_orders_cubit.dart';
+import 'package:khebra/features/notifications/cubit/notifications_cubit.dart';
 import 'package:khebra/features/offers/cubit/offers_cubit.dart';
 import 'package:khebra/features/onboarding/cubit/onboarding_cubit.dart';
 import 'package:khebra/features/order_service/cubit/order_service_cubit.dart';
+import 'package:khebra/features/profile/cubit/profile_cubit.dart';
 import 'package:khebra/features/register/cubit/register_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,50 +32,64 @@ Future<void> setup() async {
 
   serviceLocator.registerFactory(
     () => OnboardingCubit(
-         serviceLocator(),
-        ),
+      serviceLocator(),
+    ),
   );
   serviceLocator.registerFactory(
     () => LoginCubit(
-         serviceLocator(),
-        ),
+      serviceLocator(),
+    ),
   );
   serviceLocator.registerFactory(
     () => RegisterCubit(
-         serviceLocator(),
-        ),
+      serviceLocator(),
+    ),
   );
   serviceLocator.registerFactory(
     () => ForgetPasswordCubit(
-         serviceLocator(),
-        ),
+      serviceLocator(),
+    ),
   );
-  
+
   serviceLocator.registerFactory(
     () => MainCubit(
-         serviceLocator(),
-        ),
+      serviceLocator(),
+    ),
   );
   serviceLocator.registerFactory(
     () => HomeCubit(
-         serviceLocator(),
-        ),
-  );serviceLocator.registerFactory(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
     () => MyOrdersCubit(
-         serviceLocator(),
-        ),
-  );serviceLocator.registerFactory(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
     () => OffersCubit(
-         serviceLocator(),
-        ),
-  );serviceLocator.registerFactory(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
     () => MenuCubit(
-         serviceLocator(),
-        ),
-  );serviceLocator.registerFactory(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
     () => OrderServiceCubit(
-         serviceLocator(),
-        ),
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => NotificationsCubit(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => ProfileCubit(
+      serviceLocator(),
+    ),
   );
 
   final sharedPreferences = await SharedPreferences.getInstance();

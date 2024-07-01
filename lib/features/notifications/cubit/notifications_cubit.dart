@@ -1,34 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:khebra/core/remote/service.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'my_orders_states.dart';
+import 'notifications_states.dart';
 
-enum OrderStatus  {
-  preparing, 
-  completed,
-  accepted
-}
-
-class MyOrdersCubit extends Cubit<MyOrdersStates> {
-  MyOrdersCubit(this.api) : super(MyOrdersInitialState());
+class NotificationsCubit extends Cubit<NotificationsStates> {
+  NotificationsCubit(this.api) : super(NotificationsInitialState());
   ServiceApi api;
-  bool withPriceType = true;
-  void changeOrderType(bool priceType) {
-    withPriceType = priceType;
-    emit(ChangeOrderTypeStates());
-  }
-
-  String? dropdownValue;
-  List<String> filters = [
-    "all".tr(),
-    "new".tr(),
-    "done".tr(),
-  ];
-
   // addMember({
   //   required BuildContext context,
   //   String? position,

@@ -15,6 +15,10 @@ class AppColors {
   static Color grey3 = HexColor('#767676');
     static Color secondTextColor = HexColor('#373737');
     static Color dotsColor = HexColor('#F5F5F5');
+    static Color orderWaiting = HexColor('#FFFDEC');
+    static Color orderDone = HexColor('#EBFFEE');
+    static Color orderDetails = HexColor('#FCECDB');
+    static Color orderCompleted = HexColor('##F2F2F2');
 
   static Color notificationFont = HexColor('#404040');
   static Color settingDivider = HexColor('#DADADA');
@@ -31,6 +35,7 @@ class AppColors {
   static Color orange = HexColor('#FF7A00');
   static Color blueSubscribes = HexColor('#50C5DF');
   static Color red = HexColor('#BE3033');
+  static Color redButton = HexColor('#DE0000');
   static Color pink = HexColor('#D27CF0');
   static Color rewardBoxGrey = HexColor('#D2D2D2');
 

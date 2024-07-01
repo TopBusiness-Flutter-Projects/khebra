@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -113,7 +114,7 @@ class CustomServiceContainer extends StatelessWidget {
                                           fontSize: 15.sp,
                                           color: AppColors.primary)),
                                   TextSpan(
-                                      text: "ريال" "\n",
+                                      text: "currency".tr()+ "\n",
                                       style: getRegularStyle(
                                           fontSize: 15.sp,
                                           color: AppColors.primary)),

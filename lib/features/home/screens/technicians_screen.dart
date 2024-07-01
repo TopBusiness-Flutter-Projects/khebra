@@ -111,8 +111,7 @@ class _TechniciansScreenState extends State<TechniciansScreen> {
                                     mainText: "AppStringsAppStringsAppStrings",
                                     containerOnTap: () {},
                                   ),
-                                )
-                                ),
+                                )),
                           ),
                         ]),
                   ),

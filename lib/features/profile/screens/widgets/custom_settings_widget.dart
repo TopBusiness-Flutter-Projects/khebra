@@ -14,8 +14,7 @@ class CustomSettingsRow extends StatelessWidget {
     required this.icon,
     this.isLanguage = false,
     this.isTheme = false,
-    this.isNotification = false,
-    this.onTap,
+    this.isNotification = false, this.onTap,
   });
   final String text;
   final String icon;
@@ -29,14 +28,14 @@ class CustomSettingsRow extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
-          onTap: onTap,
+          onTap:  onTap,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 8.h),
             child: Row(
               children: [
                 Image.asset(
                   icon,
-                  width: 21.w,
+                  width: 24.w,
                 ),
                 SizedBox(
                   width: 10.w,
@@ -66,14 +65,9 @@ class CustomSettingsRow extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 5.h,
-          ),
-          child: Divider(
-            height: 2,
-            color: AppColors.settingDivider,
-          ),
+        Divider(
+          height: 2,
+          color: AppColors.settingDivider,
         ),
       ],
     );

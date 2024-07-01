@@ -79,8 +79,14 @@
  "deleteOrder":"Delete order",
  "editOrder":"Edit Order",
  "orderIsAccepted":"Your order has been confirmed by the technician and is awaiting completion.",
+ "waitingInspection":"Waiting for the technician to inspect and provide the price",
  "done":"Completed",
   "new":"New",
+  "notifications":"Notifications",
+ "myProjects":"My Projects",
+ "myBills":"My Bills",
+ "editProfile":"Edit Account",
+ "deleteProfile":"Delete account",
  "":"",
 
     "last": ""

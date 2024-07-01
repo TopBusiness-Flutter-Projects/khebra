@@ -44,3 +44,44 @@ class CustomAppBar extends StatelessWidget {
     );
   }
 }
+class CustomWhiteAppBar extends StatelessWidget {
+  const CustomWhiteAppBar({
+    super.key,
+    required this.title,
+    this.onPressed,
+  });
+  final String title;
+  final void Function()? onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 18.h,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          IconButton(
+              onPressed: onPressed ??
+                  () {
+                    Navigator.pop(context);
+                  },
+              icon: Icon(
+                Icons.arrow_back,
+                size: 20.h,
+                
+                color: AppColors.white,
+              )),
+          Text(
+            title.tr(),
+            style: getBoldStyle(
+              fontSize: 20.sp,
+              color: AppColors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+

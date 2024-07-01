@@ -53,6 +53,11 @@ class AppIcons {
   static const String orderTotal = '$iconsPath/orderTotal.png';
   static const String waiting = '$iconsPath/waiting.png';
   static const String whatsApp = '$iconsPath/whatsApp.png';
+  static const String deleteProfile = '$iconsPath/deleteProfile.png';
+  static const String editProfile = '$iconsPath/editProfile.png';
+  static const String myBills = '$iconsPath/myBills.png';
+  static const String myProjects = '$iconsPath/myProjects.png';
+  static const String myOrders = '$iconsPath/myOrders.png';
 
 
 }

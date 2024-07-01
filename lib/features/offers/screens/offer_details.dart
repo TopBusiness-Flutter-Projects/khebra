@@ -95,7 +95,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                                             fontSize: 15.sp,
                                             color: AppColors.primary)),
                                     TextSpan(
-                                        text: "ريال",
+                                        text: "currency".tr(),
                                         style: getRegularStyle(
                                             fontSize: 15.sp,
                                             color: AppColors.primary)),
@@ -111,7 +111,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                                     TextSpan(
                                         text: ' ', style: getLineOverStyle()),
                                     TextSpan(
-                                        text: "ريال",
+                                        text: "currency".tr(),
                                         style: getLineOverStyle(isBold: false)),
                                   ],
                                 ),

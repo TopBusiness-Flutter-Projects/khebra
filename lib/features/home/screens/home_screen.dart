@@ -103,9 +103,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       width: 5.w,
                     ),
-                    Image.asset(
-                      AppImages.notification,
-                      height: 30.w,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.notificationRoute);
+                      },
+                      child: Image.asset(
+                        AppImages.notification,
+                        height: 30.w,
+                      ),
                     ),
                   ],
                 ),

@@ -67,6 +67,9 @@ class _MenuScreenState extends State<MenuScreen> {
                           CustomSettingsRow(
                             text: "myProfile",
                             icon: AppIcons.profileIcon,
+                            onTap: () {
+                              Navigator.pushNamed(context, Routes.profileRoute);
+                            },
                           ),
                           CustomSettingsRow(
                             text: "addProject",
@@ -83,6 +86,10 @@ class _MenuScreenState extends State<MenuScreen> {
                           CustomSettingsRow(
                             text: "favourites",
                             icon: AppIcons.favouriteIcon,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.favoriteRoute);
+                            },
                           ),
                           CustomHeaderWidget(text: "settings"),
                           CustomSettingsRow(
@@ -100,27 +107,24 @@ class _MenuScreenState extends State<MenuScreen> {
                             isLanguage: true,
                             icon: AppIcons.languageIcon,
                             onTap: () {
-
                               if (EasyLocalization.of(context)!
-                                              .locale
-                                              .languageCode ==
-                                          'ar') {
-                                        EasyLocalization.of(context)!
-                                            .setLocale(Locale('en', ''));
-                                        Preferences.instance
-                                            .savedLang(AppStrings.englishCode);
-                                        Preferences.instance.getSavedLang();
-                                        HotRestartController.performHotRestart(
-                                            context);
-                                      } else {
-                                        EasyLocalization.of(context)!
-                                            .setLocale(Locale('ar', ''));
-                                        Preferences.instance
-                                            .savedLang(AppStrings.arabicCode);
-                                        Preferences.instance.getSavedLang();
-                                        HotRestartController.performHotRestart(
-                                            context);
-                                      }
+                                      .locale
+                                      .languageCode ==
+                                  'ar') {
+                                EasyLocalization.of(context)!
+                                    .setLocale(Locale('en', ''));
+                                Preferences.instance
+                                    .savedLang(AppStrings.englishCode);
+                                Preferences.instance.getSavedLang();
+                                HotRestartController.performHotRestart(context);
+                              } else {
+                                EasyLocalization.of(context)!
+                                    .setLocale(Locale('ar', ''));
+                                Preferences.instance
+                                    .savedLang(AppStrings.arabicCode);
+                                Preferences.instance.getSavedLang();
+                                HotRestartController.performHotRestart(context);
+                              }
                             },
                           ),
                           CustomSettingsRow(
