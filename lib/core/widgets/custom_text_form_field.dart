@@ -34,7 +34,8 @@ class CustomTextField extends StatefulWidget {
     this.onChanged,
     this.onTap,
     this.isPassword = false,
-    this.onSubmitted, this.borderRadius,
+    this.onSubmitted,
+    this.borderRadius,
   });
 
   @override
@@ -63,11 +64,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: widget.isMessage ? 150.h : null,
+      height: widget.isMessage ? 100.h : null,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8),
         child: TextFormField(
-          
             controller: widget.controller,
             expands: false,
             onTap: widget.onTap,
@@ -104,20 +104,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 enabledBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(color: AppColors.primaryHint, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius??8))),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(widget.borderRadius ?? 8))),
 
                 // focused border style
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.primary, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius??8))),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(widget.borderRadius ?? 8))),
 
                 // error border style
                 errorBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.red, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius??8))),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(widget.borderRadius ?? 8))),
                 focusedErrorBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.red, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius??8))))),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(widget.borderRadius ?? 8))))),
       ),
     );
   }

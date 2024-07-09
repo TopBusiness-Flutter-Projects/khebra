@@ -1,15 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:khebra/features/my_orders/cubit/my_orders_cubit.dart';
 import 'package:khebra/features/my_orders/screens/widgets/custom_info_row.dart';
 
 import '../../../../core/utils/app_export.dart';
+import '../../cubit/profile_cubit.dart';
 
-
-
-class CustomOrderContainer extends StatelessWidget {
-  const CustomOrderContainer({
+class CustomBillContainer extends StatelessWidget {
+  const CustomBillContainer({
     super.key,
     required this.isCurrent,
     // required this.orderModel,
@@ -20,7 +18,7 @@ class CustomOrderContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MyOrdersCubit cubit = context.read<MyOrdersCubit>();
+    ProfileCubit cubit = context.read<ProfileCubit>();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 2.w),
       child: Container(
@@ -48,7 +46,7 @@ class CustomOrderContainer extends StatelessWidget {
                           Flexible(
                             child: CustomInfoRow(
                                 path: AppIcons.orderNumber,
-                                text: "orderNumber".tr()),
+                                text: "billNumber".tr()),
                           ),
                           Text(
                             "#545",
@@ -86,35 +84,23 @@ class CustomOrderContainer extends StatelessWidget {
                             child: TotalRow(
                                 path: AppIcons.orderTotal, text: "600"),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, Routes.orderDetailsRoute);
-                              print("Dsadsdsdsa");
-                            },
-                            child: Row(
-                              children: [
-                                Text(
-                                  'details'.tr(),
-                                  style: getBoldStyle(
-                                      color: AppColors.primary,
-                                      fontSize: 14.sp),
-                                ),
-                                Icon(
-                                  Icons.arrow_forward_ios_sharp,
-                                  color: AppColors.primary,
-                                  size: 18.w,
-                                ),
-                              ],
-                            ),
+                          Row(
+                            children: [
+                              Image.asset(
+                                AppIcons.billShare,
+                                width: 30.w,
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Image.asset(
+                                AppIcons.billPrint,
+                                width: 30.w,
+                              ),
+                            ],
                           )
                         ],
                       ),
-                      isCurrent
-                          ? OrderStatusRow(
-                              isCurrent: true,
-                            )
-                          : OrderStatusRow(isCurrent: false)
                     ],
                   )
                 ],

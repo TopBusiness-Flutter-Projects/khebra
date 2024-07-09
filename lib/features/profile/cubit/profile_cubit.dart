@@ -1,8 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:khebra/core/remote/service.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:khebra/core/utils/app_export.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'profile_states.dart';
 
@@ -10,60 +14,57 @@ class ProfileCubit extends Cubit<ProfileStates> {
   ProfileCubit(this.api) : super(ProfileInitialState());
   ServiceApi api;
 
-  // addMember({
-  //   required BuildContext context,
-  //   String? position,
-  //   String? name,
-  //   String? nationalId,
-  //   String? cardDate,
-  //   String? address,
-  //   String? phone,
-  //   String? qualification,
-  //   String? job,
-  //   String? workPlace,
-  //   String? partisan,
-  //   String? placeAbroad,
-  //   String? passport,
-  // }) async {
+  void showImageSourceDialog(
+    BuildContext context,
+  ) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'select_image'.tr(),
+            style: getMediumStyle(),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                pickImage(context, true);
+              },
+              child: Text(
+                'gallery'.tr(),
+                style:
+                    getRegularStyle(fontSize: 12.sp, color: AppColors.primary),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                pickImage(context, false);
+              },
+              child: Text(
+                "camera".tr(),
+                style:
+                    getRegularStyle(fontSize: 12.sp, color: AppColors.primary),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-  //   AppWidget.createProgressDialog(context, "جاري التحميل");
-  //   emit(LoadingAddMemberState());
-  //   final response = await api.addMember(
-  //     type: genderRadioSelected == 1 ? "male" : "female",
-  //     position: insideRadioSelected == 1 ? "in" : "out",
-  //     imageFront: frontIDFile!.path,
-  //     imageBack: backIDFile!.path,
-  //     image: profileFile!.path,
-  //     // ignore: prefer_null_aware_operators
-  //     cv: cvFille != null ? cvFille!.path : null,
-  //     name: name,
-  //     nationalId: nationalId,
-  //     cardDate: cardDate,
-  //     governorateId: checkGovernmintId,
-  //     address: address,
-  //     phone: phone,
-  //     qualification: qualification,
-  //     job: job,
-  //     workPlace: workPlace,
-  //     partisan: partisan,
-  //     countryId: insideRadioSelected == 1 ? null : checkCoutryId,
-  //     placeAbroad: insideRadioSelected == 1 ? null : placeAbroad,
-  //     passport: insideRadioSelected == 1 ? null : passport,
-  //   );
-  //   response.fold((l) {
-  //     Navigator.pop(context);
-  //     errorGetBar("حدث خطأ");
-  //     emit(FailureAddMemberState());
-  //   }, (r) {
-  //     Navigator.pop(context);
-  //     if (r.status == 1) {
-  //       successGetBar(r.msg);
-  //       Navigator.pushReplacementNamed(context, Routes.homeRoute);
-  //     } else {
-  //       errorGetBar(r.msg!);
-  //     }
+  File? profileFile;
+  Future pickImage(BuildContext context, bool isGallery) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(
+        source: isGallery ? ImageSource.gallery : ImageSource.camera);
 
-  //     emit(SuccessAddMemberState());
-  //   });
-  // }
+    if (pickedFile != null) {
+      profileFile = File(pickedFile.path);
+
+      emit(FilePickedSuccessfully());
+    } else {
+      emit(FileNotPicked());
+    }
+    Navigator.pop(context);
+  }
 }

@@ -87,6 +87,27 @@
   "editProfile":"تعديل الحساب",
   "deleteProfile":"حذف الحساب",
   
+  "billNumber":"رقم الفاتورة",
+  "leaveYourMessage":"اترك رسالتك",
+  "callUs":"اتصل بنا",
+  "subject":"الموضوع",
+  "enterSubject":"ادخل الموضوع",
+  "messageCategory":"تصنيف الرسالة",
+  "enterCategory":"ادخل التصنيف",
+  "theMessage":"الرسالة",
+  "writeYourMessage":"اكتب رسالتك",
+  "areYouSure":"هل انت متأكد من حذف الحساب",
+  "cancel":"الغاء",
+  "update":"تحديث",
+  "projectName":"اسم المشروع",
+  "projectDescription":"وصف المشروع",
+  "enterYourDescription":"ادخل وصفك",
+  "enterYourComment":"اكتب تعليقك",
+ 
+  
+  "select_image":"اخنر صورة",
+  "camera":"الكاميرا",
+  "gallery":"المعرض",
   "":"",
  
   

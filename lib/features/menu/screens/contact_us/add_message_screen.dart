@@ -2,34 +2,26 @@
 
 import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:khebra/core/utils/assets_manager.dart';
-import 'package:khebra/core/utils/dialogs.dart';
-import 'package:khebra/core/utils/styles/app_colors.dart';
-import 'package:khebra/core/utils/styles/app_fonts.dart';
-import 'package:khebra/core/widgets/custom_text.dart';
-import 'package:khebra/core/widgets/custom_text_form_field.dart';
+import 'package:khebra/core/widgets/custom_appbar.dart';
 import 'package:khebra/core/widgets/top_business_logo.dart';
-import 'package:khebra/features/register/cubit/register_cubit.dart';
-import 'package:khebra/features/register/cubit/register_states.dart';
 
-import '../../../core/widgets/custom_button.dart';
+import '../../../../core/utils/app_export.dart';
+import '../../cubit/menu_cubit.dart';
+import '../../cubit/menu_states.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class AddMessageScreen extends StatefulWidget {
+  const AddMessageScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<AddMessageScreen> createState() => _AddMessageScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _AddMessageScreenState extends State<AddMessageScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+  TextEditingController subjectController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmController = TextEditingController();
   bool isHidden = true;
@@ -42,35 +34,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child:
-          BlocBuilder<RegisterCubit, RegisterStates>(builder: (context, state) {
-        RegisterCubit cubit = context.read<RegisterCubit>();
+      child: BlocBuilder<MenuCubit, MenuStates>(builder: (context, state) {
+        MenuCubit cubit = context.read<MenuCubit>();
         return Scaffold(
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: 18.h,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: 20.h,
-                          )),
-                      Text(
-                        "createAccount".tr(),
-                        style: getBoldStyle(fontSize: 20.sp),
-                      ),
-                    ],
-                  ),
+                CustomAppBar(
+                  title: "leaveYourMessage",
                 ),
                 Expanded(
                   child: Form(
@@ -80,10 +52,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            SizedBox(
+                              height: 15.h,
+                            ),
                             Center(
                               child: Image.asset(
-                                width: MediaQuery.of(context).size.width / 3,
-                                AppImages.logo2Image,
+                                width: MediaQuery.of(context).size.width / 2.5,
+                                AppImages.sendMessage,
                               ),
                             ),
                             SizedBox(
@@ -103,64 +78,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               controller: phoneNumberController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
-                            CustomText(text: "address"),
+                            CustomText(text: "subject"),
                             CustomTextField(
-                              labelText: 'enterAddress'.tr(),
+                              labelText: 'enterSubject'.tr(),
                               keyboardType: TextInputType.text,
-                              controller: addressController,
+                              controller: subjectController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
-                            CustomText(text: "password"),
+                            CustomText(text: "messageCategory"),
                             CustomTextField(
-                              isPassword: isHidden,
-                              suffixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      print(isHidden);
-                                      isHidden = !isHidden;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    !isHidden
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                    color: AppColors.grey,
-                                    size: 20.h,
-                                  )),
-                              labelText: 'enterPassword'.tr(),
-                              controller: passwordController,
+                              labelText: 'enterCategory'.tr(),
                               keyboardType: TextInputType.text,
+                              controller: subjectController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
-                            CustomText(text: "confirmPassword"),
+                            CustomText(text: "theMessage"),
                             CustomTextField(
-                              isPassword: isHiddenConfirm,
-                              suffixIcon: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      print(isHiddenConfirm);
-                                      isHiddenConfirm = !isHiddenConfirm;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    !isHiddenConfirm
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                    color: AppColors.grey,
-                                    size: 20.h,
-                                  )),
-                              labelText: 'enterPassword'.tr(),
-                              controller: passwordConfirmController,
+                              labelText: 'writeYourMessage'.tr(),
                               keyboardType: TextInputType.text,
+                              isMessage: true,
+                              controller: subjectController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
                             SizedBox(
-                              height: 15.h,
+                              height: 12.h,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomButton(
-                                text: "createAccount".tr(),
+                                text: "send".tr(),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
                                     //  cubit.addMember(

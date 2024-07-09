@@ -9,13 +9,18 @@ import 'package:khebra/features/home/screens/servicies_screen.dart';
 import 'package:khebra/features/home/screens/technicians_screen.dart';
 import 'package:khebra/features/login/screens/login_screen.dart';
 import 'package:khebra/features/main/screens/main_screen.dart';
+import 'package:khebra/features/menu/screens/contact_us/add_message_screen.dart';
+import 'package:khebra/features/menu/screens/contact_us/contac_us.dart';
 import 'package:khebra/features/menu/screens/favourites_screen.dart';
+import 'package:khebra/features/my_orders/screens/my_orders_screen.dart';
 import 'package:khebra/features/my_orders/screens/order_details_screen.dart';
 import 'package:khebra/features/notifications/screens/notifications_screen.dart';
 import 'package:khebra/features/offers/screens/offer_details.dart';
 import 'package:khebra/features/onboarding/screens/onboard_screen.dart';
 import 'package:khebra/features/order_service/screens/order_service_screen.dart';
+import 'package:khebra/features/profile/screens/my_bills_screen.dart';
 import 'package:khebra/features/profile/screens/profile_screen.dart';
+import 'package:khebra/features/profile/screens/update_profile_screen.dart';
 import 'package:khebra/features/register/cubit/register_cubit.dart';
 import 'package:khebra/features/register/screens/register_screen.dart';
 import 'package:khebra/features/splash/screens/splash_screen.dart';
@@ -43,11 +48,14 @@ class Routes {
   static const String fullScreenImageRoute = '/fullScreenImageRoute';
   static const String editProfileRoute = '/editProfile';
   static const String profileRoute = '/profile';
+  static const String updateProfileRoute = '/updateProfile';
+  static const String myBillsRoute = '/myBills';
   static const String allServicesRoute = '/allServices';
   static const String privacyRoute = '/privacy_about';
-  static const String myPostsRoute = '/my_posts';
+  static const String myOrdersRoute = '/myOrders';
   static const String detailsRoute = '/details';
   static const String contactUsRoute = '/contact_us';
+  static const String addMessageRoute = '/addMessage';
   static const String googleMapDetailsRoute = '/google_map_details_screen';
 }
 
@@ -123,6 +131,28 @@ class AppRoutes {
       case Routes.profileRoute:
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),
+        );
+      case Routes.myBillsRoute:
+        return MaterialPageRoute(
+          builder: (context) => const MyBillsScreen(),
+        );
+      case Routes.updateProfileRoute:
+        return MaterialPageRoute(
+          builder: (context) => const UpdateProfileScreen(),
+        );
+      case Routes.contactUsRoute:
+        return MaterialPageRoute(
+          builder: (context) => const ContactUsScreen(),
+        );
+      case Routes.addMessageRoute:
+        return MaterialPageRoute(
+          builder: (context) => const AddMessageScreen(),
+        );
+      case Routes.myOrdersRoute:
+              bool withBackButton = settings.arguments as bool;
+
+        return MaterialPageRoute(
+          builder: (context) =>  MyOrdersScreen(withBackButton: withBackButton,),
         );
 
       default:

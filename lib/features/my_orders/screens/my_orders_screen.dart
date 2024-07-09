@@ -26,8 +26,9 @@ import '../../../core/widgets/custom_button.dart';
 import 'widgets/custom_order_container.dart';
 
 class MyOrdersScreen extends StatefulWidget {
-  const MyOrdersScreen({Key? key}) : super(key: key);
-
+  const MyOrdersScreen({Key? key, required this.withBackButton})
+      : super(key: key);
+  final bool withBackButton;
   @override
   State<MyOrdersScreen> createState() => _MyOrdersScreenState();
 }
@@ -53,13 +54,17 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.all(18.h),
-                child: Text(
-                  "myOrders".tr(),
-                  style: getBoldStyle(fontSize: 20.sp),
-                ),
-              ),
+              widget.withBackButton
+                  ? CustomAppBar(
+                      title: "myOrders",
+                    )
+                  : Padding(
+                      padding: EdgeInsets.all(18.h),
+                      child: Text(
+                        "myOrders".tr(),
+                        style: getBoldStyle(fontSize: 20.sp),
+                      ),
+                    ),
               Padding(
                 padding: EdgeInsets.all(10.w),
                 child: Row(

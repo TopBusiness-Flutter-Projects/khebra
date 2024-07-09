@@ -22,6 +22,9 @@ class AppImages {
   static const String search = '$imagePath/search.png';
   static const String bluePlus = '$imagePath/bluePlus.png';
   static const String filter = '$imagePath/filter.png';
+  static const String addProject = '$imagePath/addProject.png';
+  static const String contactUs = '$imagePath/contactUs.png';
+  static const String sendMessage = '$imagePath/sendMessage.png';
 
   // static const String phoneIcon = '$iconsPath/phone.svg';
 
@@ -58,6 +61,10 @@ class AppIcons {
   static const String myBills = '$iconsPath/myBills.png';
   static const String myProjects = '$iconsPath/myProjects.png';
   static const String myOrders = '$iconsPath/myOrders.png';
+  static const String billPrint = '$iconsPath/billPrint.png';
+  static const String billShare = '$iconsPath/billShare.png';
+  static const String callContactUs = '$iconsPath/callContactUs.png';
+  static const String messageContactUs = '$iconsPath/messageContactUs.png';
 
 
 }

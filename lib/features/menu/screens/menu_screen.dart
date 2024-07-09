@@ -130,6 +130,10 @@ class _MenuScreenState extends State<MenuScreen> {
                           CustomSettingsRow(
                             text: "contactUs",
                             icon: AppIcons.callUsIcon,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.contactUsRoute);
+                            },
                           ),
                           CustomSettingsRow(
                             text: "aboutApp",

@@ -1,25 +1,17 @@
 // ignore_for_file: use_super_parameters, prefer_const_constructors
 
-import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:khebra/config/routes/app_routes.dart';
-import 'package:khebra/core/preferences/preferences.dart';
 import 'package:khebra/core/utils/app_strings.dart';
-import 'package:khebra/core/utils/assets_manager.dart';
-import 'package:khebra/core/utils/restart_app_class.dart';
-import 'package:khebra/core/utils/styles/app_colors.dart';
-import 'package:khebra/core/utils/styles/app_fonts.dart';
 import 'package:khebra/core/widgets/custom_appBar.dart';
 import 'package:khebra/core/widgets/network_image.dart';
-import 'package:khebra/features/menu/screens/widgets/custom_header_widget.dart';
 import 'package:khebra/features/menu/screens/widgets/custom_settings_widget.dart';
+import 'package:khebra/features/my_orders/screens/widgets/custom_button.dart';
 import 'package:khebra/features/profile/cubit/profile_cubit.dart';
 import 'package:khebra/features/profile/cubit/profile_states.dart';
+
+import '../../../core/utils/app_export.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -123,7 +115,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(
                 height: 10.h,
               ),
-
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -138,19 +129,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           CustomSettingsRow(
                             text: "myOrders",
                             icon: AppIcons.myOrders,
+                            onTap: () {
+                              Navigator.pushNamed(context, Routes.myOrdersRoute,
+                                  arguments: true);
+                            },
                           ),
                           CustomSettingsRow(
                             text: "myBills",
                             icon: AppIcons.myBills,
+                            onTap: () {
+                              Navigator.pushNamed(context, Routes.myBillsRoute);
+                            },
                           ),
                           CustomSettingsRow(
                             text: "editProfile",
                             icon: AppIcons.editProfile,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.updateProfileRoute);
+                            },
                           ),
                           CustomSettingsRow(
                             text: "deleteProfile",
                             icon: AppIcons.deleteProfile,
                             onTap: () {
+                              showDeleteAccountDialog(context);
                               //  Navigator.pushNamed(
                               //      context, Routes.favoriteRoute);
                             },
@@ -159,14 +162,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-              // Image.asset(
-              //   width: double.infinity,
-              //   AppImages.login,
-              // )
             ],
           ),
         );
       }),
     );
   }
+}
+
+void showDeleteAccountDialog(
+  BuildContext context,
+) async {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        actionsPadding: EdgeInsets.symmetric(horizontal: 4.w),
+        title: Padding(
+          padding: EdgeInsets.all(15.w),
+          child: Text(
+            'areYouSure'.tr(),
+            textAlign: TextAlign.center,
+            style: getMediumStyle(),
+          ),
+        ),
+        actions: <Widget>[
+          Row(
+            children: [
+              Flexible(
+                child: CustomOrderButton(
+                  text: "confirm",
+                  onTap: () {},
+                  radius: 18,
+                  buttonColor: AppColors.green,
+                  textColor: AppColors.white,
+                ),
+              ),
+              SizedBox(
+                width: 5.w,
+              ),
+              Flexible(
+                child: CustomOrderButton(
+                  text: "cancel",
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  radius: 18,
+                  buttonColor: AppColors.redButton,
+                  textColor: AppColors.white,
+                ),
+              ),
+            ],
+          ),
+        ],
+      );
+    },
+  );
 }

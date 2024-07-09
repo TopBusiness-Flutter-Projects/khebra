@@ -1,30 +1,23 @@
 // ignore_for_file: use_super_parameters, prefer_const_constructors
 
-import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:khebra/core/utils/assets_manager.dart';
-import 'package:khebra/core/utils/dialogs.dart';
-import 'package:khebra/core/utils/styles/app_colors.dart';
-import 'package:khebra/core/utils/styles/app_fonts.dart';
-import 'package:khebra/core/widgets/custom_text.dart';
-import 'package:khebra/core/widgets/custom_text_form_field.dart';
-import 'package:khebra/core/widgets/top_business_logo.dart';
-import 'package:khebra/features/register/cubit/register_cubit.dart';
-import 'package:khebra/features/register/cubit/register_states.dart';
+import 'package:flutter/widgets.dart';
+import 'package:khebra/core/widgets/custom_appBar.dart';
 
-import '../../../core/widgets/custom_button.dart';
+import 'package:khebra/features/profile/cubit/profile_cubit.dart';
+import 'package:khebra/features/profile/cubit/profile_states.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+import '../../../core/utils/app_export.dart';
+
+class UpdateProfileScreen extends StatefulWidget {
+  const UpdateProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
@@ -36,6 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool isHiddenConfirm = true;
   @override
   void initState() {
+    context.read<ProfileCubit>().profileFile = null;
     super.initState();
   }
 
@@ -43,34 +37,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child:
-          BlocBuilder<RegisterCubit, RegisterStates>(builder: (context, state) {
-        RegisterCubit cubit = context.read<RegisterCubit>();
+          BlocBuilder<ProfileCubit, ProfileStates>(builder: (context, state) {
+        ProfileCubit cubit = context.read<ProfileCubit>();
         return Scaffold(
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: 18.h,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: 20.h,
-                          )),
-                      Text(
-                        "createAccount".tr(),
-                        style: getBoldStyle(fontSize: 20.sp),
-                      ),
-                    ],
-                  ),
+                CustomAppBar(
+                  title: "editProfile",
                 ),
                 Expanded(
                   child: Form(
@@ -81,9 +56,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Center(
-                              child: Image.asset(
-                                width: MediaQuery.of(context).size.width / 3,
-                                AppImages.logo2Image,
+                              child: Stack(
+                                alignment: Alignment.bottomRight,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(1000),
+                                    child: cubit.profileFile == null
+                                        ? CustomNetworkImage(
+                                            imageUrl:
+                                                " AppStrings.testNetworkImage",
+                                            height: 100.w,
+                                            width: 100.w,
+                                          )
+                                        : Image.file(
+                                            cubit.profileFile!,
+                                            fit: BoxFit.cover,
+                                            height: 100.w,
+                                            width: 100.w,
+                                          ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      cubit.showImageSourceDialog(context);
+                                    },
+                                    child: CircleAvatar(
+                                        backgroundColor: AppColors.primary,
+                                        child: Icon(
+                                          Icons.camera_alt,
+                                          color: AppColors.secondPrimary,
+                                        )),
+                                  )
+                                ],
                               ),
                             ),
                             SizedBox(
@@ -103,14 +106,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               controller: phoneNumberController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
-                            CustomText(text: "address"),
-                            CustomTextField(
-                              labelText: 'enterAddress'.tr(),
-                              keyboardType: TextInputType.text,
-                              controller: addressController,
-                              validator: (value) => value!.isEmpty ? '' : null,
-                            ),
-                            CustomText(text: "password"),
+                            // CustomText(text: "address"),
+                            // CustomTextField(
+                            //   labelText: 'enterAddress'.tr(),
+                            //   keyboardType: TextInputType.text,
+                            //   controller: addressController,
+                            //   validator: (value) => value!.isEmpty ? '' : null,
+                            // ),
+                            CustomText(text: "newPassword"),
                             CustomTextField(
                               isPassword: isHidden,
                               suffixIcon: IconButton(
@@ -155,12 +158,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
                             SizedBox(
-                              height: 15.h,
+                              height: 35.h,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomButton(
-                                text: "createAccount".tr(),
+                                text: "update".tr(),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
                                     //  cubit.addMember(
@@ -191,7 +194,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                TopBusinessLogo()
               ],
             ),
           ),
@@ -200,3 +202,5 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
+
+

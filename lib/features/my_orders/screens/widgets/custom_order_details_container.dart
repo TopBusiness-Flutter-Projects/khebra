@@ -260,7 +260,7 @@ class DeleteAndEditOrderRow extends StatelessWidget {
     return Row(
       children: [
         Flexible(
-          child: CustomButton(
+          child: CustomOrderButton(
               text: "deleteOrder",
               onTap: () {},
               buttonColor: AppColors.redButton,
@@ -270,7 +270,7 @@ class DeleteAndEditOrderRow extends StatelessWidget {
           width: 10.w,
         ),
         Flexible(
-          child: CustomButton(
+          child: CustomOrderButton(
               text: "editOrder",
               onTap: () {},
               buttonColor: AppColors.secondPrimary,

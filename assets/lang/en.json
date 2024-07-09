@@ -87,6 +87,27 @@
  "myBills":"My Bills",
  "editProfile":"Edit Account",
  "deleteProfile":"Delete account",
+
+ "billNumber":"Bill number",
+ "leaveYourMessage":"Leave your message",
+ "callUs":"Contact Us",
+ "subject":"Subject",
+ "enterSubject":"Enter the subject",
+ "messageCategory":"Message Category",
+ "enterCategory":"Enter the category",
+ "theMessage":"The message",
+ "writeYourMessage":"Write your message",
+ "areYouSure":"Are you sure to delete the account",
+ "cancel":"Cancel",
+ "update":"Update",
+ "projectName":"Project Name",
+ "projectDescription":"Project Description",
+ "enterYourDiscription":"Enter your description",
+ "enterYourComment":"Write your comment",
+ "select_image":"Select image",
+  "camera":"Camera",
+  "gallery":"Gallery",
+
  "":"",
 
     "last": ""

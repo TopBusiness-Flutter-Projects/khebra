@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:khebra/core/utils/styles/app_fonts.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class CustomOrderButton extends StatelessWidget {
+  const CustomOrderButton({
     super.key,
     required this.text,
     required this.onTap,
     required this.buttonColor,
     required this.textColor,
     this.path,
-    this.borderColor,
+    this.borderColor,  this.radius =50,
   });
   final String text;
   final String? path;
@@ -20,6 +20,7 @@ class CustomButton extends StatelessWidget {
   final Color buttonColor;
   final Color? borderColor;
   final Color textColor;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class CustomButton extends StatelessWidget {
           decoration: BoxDecoration(
               color: buttonColor,
               border: Border.all(color: borderColor ?? buttonColor),
-              borderRadius: BorderRadius.circular(50)),
+              borderRadius: BorderRadius.circular(radius)),
           child: Align(
             alignment: Alignment.center,
             child: Row(
