@@ -13,14 +13,18 @@ class AppColors {
   static Color grey = HexColor('#747474');
   static Color grey2 = HexColor('#205960');
   static Color grey3 = HexColor('#767676');
-  static Color grey4 = HexColor('#979797');
-    static Color secondTextColor = HexColor('#373737');
-    static Color dotsColor = HexColor('#F5F5F5');
-    static Color orderWaiting = HexColor('#FFFDEC');
-    static Color orderDone = HexColor('#EBFFEE');
-    static Color orderDetails = HexColor('#FCECDB');
-    static Color orderCompleted = HexColor('##F2F2F2');
-    static Color green = HexColor('##04CA00');
+  static Color greyText = HexColor('#3D3D3D');
+    static Color greyHint2 = HexColor('#8A8A8A');
+    static Color addServiceContainer = HexColor('#F5ECE0');
+
+  static Color borderColor = HexColor('#979797');
+  static Color secondTextColor = HexColor('#373737');
+  static Color dotsColor = HexColor('#F5F5F5');
+  static Color orderWaiting = HexColor('#FFFDEC');
+  static Color orderDone = HexColor('#EBFFEE');
+  static Color orderDetails = HexColor('#FCECDB');
+  static Color orderCompleted = HexColor('##F2F2F2');
+  static Color green = HexColor('##04CA00');
 
   static Color notificationFont = HexColor('#404040');
   static Color settingDivider = HexColor('#DADADA');

@@ -25,6 +25,7 @@ class AppImages {
   static const String addProject = '$imagePath/addProject.png';
   static const String contactUs = '$imagePath/contactUs.png';
   static const String sendMessage = '$imagePath/sendMessage.png';
+  static const String uploadIcon = '$imagePath/upload_icon.png';
 
   // static const String phoneIcon = '$iconsPath/phone.svg';
 

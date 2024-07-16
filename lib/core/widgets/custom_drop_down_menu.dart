@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khebra/core/utils/app_export.dart';
 import 'package:khebra/core/widgets/custom_bordered_container.dart';
 
 import '../utils/custom_svg_icon.dart';
@@ -31,7 +32,10 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
         isDropDown: true,
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
-           // icon: AppIcons.arrowDown,
+            icon: Icon(
+              Icons.keyboard_arrow_down_rounded,
+              size: 23.w,
+            ),
             hint: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

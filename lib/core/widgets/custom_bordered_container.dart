@@ -18,7 +18,7 @@ class CustomBorderedContainer extends StatelessWidget {
       decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: AppColors.primaryGrey)),
+          border: Border.all(color: AppColors.borderColor)),
       child: Padding(
         padding:
             EdgeInsets.symmetric(horizontal: 20, vertical: isDropDown ? 5 : 18),

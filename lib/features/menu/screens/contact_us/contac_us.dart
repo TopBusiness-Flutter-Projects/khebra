@@ -87,7 +87,7 @@ class CustomRow extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(18)),
-            border: Border.all(color: AppColors.grey4)),
+            border: Border.all(color: AppColors.borderColor)),
         child: Padding(
           padding: EdgeInsets.all(18.0),
           child: Row(

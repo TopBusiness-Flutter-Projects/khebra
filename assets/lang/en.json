@@ -107,6 +107,15 @@
  "select_image":"Select image",
   "camera":"Camera",
   "gallery":"Gallery",
+"serviceImages": "Images related to the requested service",
+ "selectExperience": "Select the technician's level of experience",
+ "selectDate": "Select date",
+ "selectTime": "Select time",
+ "uploadImage":"Upload image",
+ "selectCategory": "Select the category",
+ "selectService": "Select the service type",
+ "selectTheExperience": "Select the experience",
+ "addService": "order a service",
 
  "":"",
 
