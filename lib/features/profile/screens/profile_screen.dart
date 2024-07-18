@@ -125,6 +125,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           CustomSettingsRow(
                             text: "myProjects",
                             icon: AppIcons.myProjects,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.projectScreen,
+                              );
+                            },
                           ),
                           CustomSettingsRow(
                             text: "myOrders",

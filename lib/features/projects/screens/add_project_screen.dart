@@ -1,28 +1,26 @@
 // ignore_for_file: use_super_parameters, prefer_const_constructors
 
-import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:easy_localization/easy_localization.dart';
+
 import 'package:khebra/core/widgets/custom_appbar.dart';
-import 'package:khebra/core/widgets/top_business_logo.dart';
+import 'package:khebra/features/projects/cubit/projects_states.dart';
 
-import '../../../../core/utils/app_export.dart';
-import '../../cubit/menu_cubit.dart';
-import '../../cubit/menu_states.dart';
+import '../../../core/utils/app_export.dart';
+import '../cubit/projects_cubit.dart';
 
-class AddMessageScreen extends StatefulWidget {
-  const AddMessageScreen({Key? key}) : super(key: key);
+class AddProjectScreen extends StatefulWidget {
+  const AddProjectScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddMessageScreen> createState() => _AddMessageScreenState();
+  State<AddProjectScreen> createState() => _AddProjectScreenState();
 }
 
-class _AddMessageScreenState extends State<AddMessageScreen> {
+class _AddProjectScreenState extends State<AddProjectScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
-
 
   @override
   void initState() {
@@ -32,15 +30,16 @@ class _AddMessageScreenState extends State<AddMessageScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocBuilder<MenuCubit, MenuStates>(builder: (context, state) {
-        MenuCubit cubit = context.read<MenuCubit>();
+      child: BlocBuilder<ProjectsCubit, ProjectsStates>(builder: (context, state) {
+        ProjectsCubit cubit = context.read<ProjectsCubit>();
+         
         return Scaffold(
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
               children: [
                 CustomAppBar(
-                  title: "leaveYourMessage",
+                  title: "addProject",
                 ),
                 Expanded(
                   child: Form(
@@ -56,43 +55,22 @@ class _AddMessageScreenState extends State<AddMessageScreen> {
                             Center(
                               child: Image.asset(
                                 width: MediaQuery.of(context).size.width / 2.5,
-                                AppImages.sendMessage,
+                                AppImages.addProject,
                               ),
                             ),
                             SizedBox(
                               height: 15.h,
                             ),
-                            CustomText(text: "name"),
+                            CustomText(text: "projectName"),
                             CustomTextField(
                               labelText: 'enterName'.tr(),
                               keyboardType: TextInputType.text,
                               controller: nameController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
-                            CustomText(text: "phone"),
+                            CustomText(text: "projectDescription"),
                             CustomTextField(
-                              labelText: 'enterPhone'.tr(),
-                              keyboardType: TextInputType.phone,
-                              controller: phoneNumberController,
-                              validator: (value) => value!.isEmpty ? '' : null,
-                            ),
-                            CustomText(text: "subject"),
-                            CustomTextField(
-                              labelText: 'enterSubject'.tr(),
-                              keyboardType: TextInputType.text,
-                              controller: subjectController,
-                              validator: (value) => value!.isEmpty ? '' : null,
-                            ),
-                            CustomText(text: "messageCategory"),
-                            CustomTextField(
-                              labelText: 'enterCategory'.tr(),
-                              keyboardType: TextInputType.text,
-                              controller: subjectController,
-                              validator: (value) => value!.isEmpty ? '' : null,
-                            ),
-                            CustomText(text: "theMessage"),
-                            CustomTextField(
-                              labelText: 'writeYourMessage'.tr(),
+                              labelText: 'enterYourDescription'.tr(),
                               keyboardType: TextInputType.text,
                               isMessage: true,
                               controller: subjectController,
@@ -106,6 +84,8 @@ class _AddMessageScreenState extends State<AddMessageScreen> {
                               child: CustomButton(
                                 text: "send".tr(),
                                 onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, Routes.projectScreen);
                                   if (formKey.currentState!.validate()) {
                                     //  cubit.addMember(
                                     //    context: context,
@@ -128,14 +108,13 @@ class _AddMessageScreenState extends State<AddMessageScreen> {
                                 },
                               ),
                             ),
-                            SizedBox(
-                              height: 35.h,
-                            ),
+                            // SizedBox(
+                            //   height: 35.h,
+                            // ),
                           ]),
                     ),
                   ),
                 ),
-                TopBusinessLogo()
               ],
             ),
           ),

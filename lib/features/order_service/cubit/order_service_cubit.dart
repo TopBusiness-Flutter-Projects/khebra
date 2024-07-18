@@ -11,7 +11,9 @@ import '../../../core/utils/app_export.dart';
 import 'orders_service_states.dart';
 
 class OrderServiceCubit extends Cubit<OrderServiceStates> {
-  OrderServiceCubit(this.api) : super(OrderServiceInitialState());
+  OrderServiceCubit(this.api) : super(OrderServiceInitialState()) {
+    changeSelecttime(timesList.first);
+  }
   ServiceApi api;
 
 //  final EasyInfiniteDateTimelineController easyInfiniteDateTimelineController =
@@ -96,7 +98,8 @@ class OrderServiceCubit extends Cubit<OrderServiceStates> {
     Navigator.pop(context);
   }
 
-  String selectedTime = "10:30 am";
+  String selectedTime = "";
+  // String selectedTime = "10:30 am";
   changeSelecttime(String e) {
     selectedTime = e;
 

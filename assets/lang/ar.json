@@ -80,6 +80,7 @@
   "orderIsAccepted": "تم تأكيد طلبك من الفنى وفى انتظار اكتماله",
   "done": "مكتملة",
   "new": "جديدة",
+  "waiting": "قيد الإنتظار",
   "waitingInspection": "فى انتظار المعاينة من الفنى وتقديم  السعر",
   "notifications": "الإشعارات",
   "myProjects": "مشاريعى",
@@ -113,8 +114,25 @@
   "selectCategory": "اختر التصنيف",
   "selectService": "اختر نوع الخدمة",
   "selectTheExperience": "اختر الخبرة",
-
   "addService": "طلب الخدمة",
-  "": "",
+  "projectDetails": "تفاصيل المشروع",
+  "submit": "تقديم عرض سعر",
+  "submittingTheProject": "تقديم عقد المشروع",
+  "submitTimetable": "تقديم الجدول الزمنى",
+  "timetable": "الجدول الزمني",
+  "projectContract": "عقد المشروع",
+  
+  "cancelOffer": "رفض العرض",
+  "acceptOffer": "قبول العرض",
+  "priceOffers": "عروض السعر",
+  "followProject": "متابعة المشروع",
+  "priceOffer": "عرض السعر :", 
+   "priceDetails": "تفاصيل السعر :",
+   "rates": "التقييمات",
+   "rateTechnicians": "تقييم الفني",
+   "techniciansProfile": "حساب الفني",
+  
+   "": "",
+ 
   "last": ""
 }

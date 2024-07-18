@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:khebra/config/routes/app_routes.dart';
 import 'package:khebra/core/preferences/preferences.dart';
+import 'package:khebra/core/utils/app_export.dart';
 import 'package:khebra/core/utils/app_strings.dart';
 import 'package:khebra/core/utils/assets_manager.dart';
 import 'package:khebra/core/utils/dialogs.dart';
@@ -49,20 +50,28 @@ class _MenuScreenState extends State<MenuScreen> {
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Padding(
+                  padding: EdgeInsets.all(18.h),
+                  child: Text(
+                    "menu".tr(),
+                    style: getBoldStyle(fontSize: 20.sp),
+                  ),
+                ),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                            padding: EdgeInsets.all(18.h),
-                            child: Text(
-                              "menu".tr(),
-                              style: getBoldStyle(fontSize: 20.sp),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: EdgeInsets.all(18.h),
+                          //   child: Text(
+                          //     "menu".tr(),
+                          //     style: getBoldStyle(fontSize: 20.sp),
+                          //   ),
+                          // ),
                           CustomHeaderWidget(text: "myInformation"),
                           CustomSettingsRow(
                             text: "myProfile",
@@ -74,6 +83,10 @@ class _MenuScreenState extends State<MenuScreen> {
                           CustomSettingsRow(
                             text: "addProject",
                             icon: AppIcons.addProjectIcon,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.addProjectRoute);
+                            },
                           ),
                           CustomSettingsRow(
                             text: "subscribe",

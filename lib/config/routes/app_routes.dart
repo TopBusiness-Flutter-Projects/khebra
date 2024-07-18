@@ -6,7 +6,9 @@ import 'package:khebra/features/home/cubit/home_cubit.dart';
 import 'package:khebra/features/home/screens/categories_screen.dart';
 import 'package:khebra/features/home/screens/home_screen.dart';
 import 'package:khebra/features/home/screens/servicies_screen.dart';
-import 'package:khebra/features/home/screens/technicians_screen.dart';
+import 'package:khebra/features/home/screens/technicians/all_rates_screen.dart';
+import 'package:khebra/features/home/screens/technicians/technicians_profile_screen.dart';
+import 'package:khebra/features/home/screens/technicians/technicians_screen.dart';
 import 'package:khebra/features/login/screens/login_screen.dart';
 import 'package:khebra/features/main/screens/main_screen.dart';
 import 'package:khebra/features/menu/screens/contact_us/add_message_screen.dart';
@@ -21,11 +23,15 @@ import 'package:khebra/features/order_service/screens/order_service_screen.dart'
 import 'package:khebra/features/profile/screens/my_bills_screen.dart';
 import 'package:khebra/features/profile/screens/profile_screen.dart';
 import 'package:khebra/features/profile/screens/update_profile_screen.dart';
+import 'package:khebra/features/projects/screens/add_project_screen.dart';
+import 'package:khebra/features/projects/screens/project_details.dart';
 import 'package:khebra/features/register/cubit/register_cubit.dart';
 import 'package:khebra/features/register/screens/register_screen.dart';
 import 'package:khebra/features/splash/screens/splash_screen.dart';
 
 import '../../core/utils/app_strings.dart';
+import '../../features/projects/screens/projects_screen.dart';
+import '../../features/projects/screens/timetable_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -56,7 +62,13 @@ class Routes {
   static const String detailsRoute = '/details';
   static const String contactUsRoute = '/contact_us';
   static const String addMessageRoute = '/addMessage';
+  static const String addProjectRoute = '/addProject';
   static const String googleMapDetailsRoute = '/google_map_details_screen';
+  static const String stepperPage = '/stepperPage';
+  static const String projectScreen = '/projectScreen';
+  static const String projectDetailsScreen = '/projectDetails';
+  static const String techniciansProfile = '/techniciansProfile';
+  static const String allRatesProfile = '/allRatesProfile';
 }
 
 class AppRoutes {
@@ -148,11 +160,39 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const AddMessageScreen(),
         );
+      case Routes.addProjectRoute:
+        return MaterialPageRoute(
+          builder: (context) => const AddProjectScreen(),
+        );
+      case Routes.stepperPage:
+        return MaterialPageRoute(
+          builder: (context) =>const TimetableScreen(),
+        );
+      case Routes.techniciansProfile:
+        return MaterialPageRoute(
+          builder: (context) =>const TechniciansProfileScreen(),
+        );
+      case Routes.allRatesProfile:
+        return MaterialPageRoute(
+          builder: (context) =>const AllRatesScreen(),
+        );
+
+      case Routes.projectDetailsScreen:
+        return MaterialPageRoute(
+          builder: (context) => const ProjectDetailsScreen(),
+        );
+      case Routes.projectScreen:
+        return MaterialPageRoute(
+          builder: (context) => const ProjectsScreen(),
+        );
+
       case Routes.myOrdersRoute:
-              bool withBackButton = settings.arguments as bool;
+        bool withBackButton = settings.arguments as bool;
 
         return MaterialPageRoute(
-          builder: (context) =>  MyOrdersScreen(withBackButton: withBackButton,),
+          builder: (context) => MyOrdersScreen(
+            withBackButton: withBackButton,
+          ),
         );
 
       default:

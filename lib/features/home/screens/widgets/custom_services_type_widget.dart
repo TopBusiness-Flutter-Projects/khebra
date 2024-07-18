@@ -16,22 +16,22 @@ class ServicesType extends StatelessWidget {
   final String departmentName;
   @override
   Widget build(BuildContext context) {
-    return Container(
-        // height: 56,
-        // width: MediaQuery.of(context).size.width / 2.5,
-        padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 10.h),
-        decoration: BoxDecoration(
-            color: isSelected ? AppColors.primary : AppColors.gray1,
-            borderRadius: BorderRadius.all(Radius.circular(50))),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Text(
-            departmentName.tr(),
-            maxLines: 2,
-            textAlign: TextAlign.center,
-            style: getRegularStyle(
-                color: AppColors.white, fontHeight: 1, fontSize: 13.w),
-          ),
-        ));
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 3.w),
+        child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.w,
+            ),
+            decoration: BoxDecoration(
+                color: isSelected ? AppColors.primary : AppColors.gray1,
+                borderRadius: BorderRadius.all(Radius.circular(50))),
+            child: Text(
+              departmentName.tr(),
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              style: getRegularStyle(
+                  color: AppColors.white, fontHeight: 1, fontSize: 13.w),
+            )));
   }
 }

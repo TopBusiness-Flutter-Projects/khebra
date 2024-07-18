@@ -21,6 +21,8 @@ import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
 import 'package:khebra/injector.dart' as injector;
 
+import 'features/projects/cubit/projects_cubit.dart';
+
 class KhebraApp extends StatefulWidget {
   const KhebraApp({super.key});
 
@@ -84,6 +86,9 @@ class _KhebraAppState extends State<KhebraApp> {
                 ),
                 BlocProvider(
                   create: (_) => injector.serviceLocator<ProfileCubit>(),
+                ),
+                BlocProvider(
+                  create: (_) => injector.serviceLocator<ProjectsCubit>(),
                 ),
               ],
               child: GetMaterialApp(

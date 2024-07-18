@@ -19,6 +19,7 @@ import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';
 import 'core/remote/service.dart';
+import 'features/projects/cubit/projects_cubit.dart';
 
 // import 'features/downloads_videos/cubit/downloads_videos_cubit.dart';
 
@@ -88,6 +89,11 @@ Future<void> setup() async {
   );
   serviceLocator.registerFactory(
     () => ProfileCubit(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => ProjectsCubit(
       serviceLocator(),
     ),
   );

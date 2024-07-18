@@ -65,34 +65,66 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                         style: getBoldStyle(fontSize: 20.sp),
                       ),
                     ),
-              Padding(
-                padding: EdgeInsets.all(10.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+              SizedBox(
+                height: 30.h,
+                child: ListView(
+                  // physics: ,
+                  scrollDirection: Axis.horizontal,
                   children: [
-                    Flexible(
-                      child: GestureDetector(
-                          onTap: () {
-                            cubit.changeOrderType(true);
-                            print(cubit.withPriceType);
-                          },
-                          child: ServicesType(
-                              departmentName: 'ordersWithOffers',
-                              isSelected: cubit.withPriceType)),
+                    SizedBox(
+                      width: 10.w,
                     ),
-                    Flexible(
-                      child: GestureDetector(
-                          onTap: () {
-                            cubit.changeOrderType(false);
-                            print(cubit.withPriceType);
-                          },
-                          child: ServicesType(
-                              departmentName: 'ordersWithoutOffers',
-                              isSelected: !cubit.withPriceType)),
+                    GestureDetector(
+                        onTap: () {
+                          cubit.changeOrderType(true);
+                          print(cubit.withPriceType);
+                        },
+                        child: ServicesType(
+                            departmentName: 'ordersWithOffers',
+                            isSelected: cubit.withPriceType)),
+                    SizedBox(
+                      width: 10.w,
                     ),
+                    GestureDetector(
+                        onTap: () {
+                          cubit.changeOrderType(false);
+                          print(cubit.withPriceType);
+                        },
+                        child: ServicesType(
+                            departmentName: 'ordersWithoutOffers',
+                            isSelected: !cubit.withPriceType)),
                   ],
                 ),
               ),
+              // Padding(
+              //   padding: EdgeInsets.all(10.w),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Flexible(
+              //         child: GestureDetector(
+              //             onTap: () {
+              //               cubit.changeOrderType(true);
+              //               print(cubit.withPriceType);
+              //             },
+              //             child: ServicesType(
+              //                 departmentName: 'ordersWithOffers',
+              //                 isSelected: cubit.withPriceType)),
+              //       ),
+              //       Flexible(
+              //         child: GestureDetector(
+              //             onTap: () {
+              //               cubit.changeOrderType(false);
+              //               print(cubit.withPriceType);
+              //             },
+              //             child: ServicesType(
+              //                 departmentName: 'ordersWithoutOffers',
+              //                 isSelected: !cubit.withPriceType)),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               Padding(
                 padding: EdgeInsets.all(10.w),
                 child: CustomFilterDropDownMenu(
