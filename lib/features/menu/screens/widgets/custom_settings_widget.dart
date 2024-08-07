@@ -79,12 +79,10 @@ class CustomSettingsRow extends StatelessWidget {
     );
   }
 }
-
 class ThemeSwitch extends StatelessWidget {
   const ThemeSwitch({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return CupertinoSwitch(

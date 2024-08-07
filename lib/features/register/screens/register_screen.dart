@@ -27,11 +27,6 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordConfirmController = TextEditingController();
   bool isHidden = true;
   bool isHiddenConfirm = true;
   @override
@@ -93,21 +88,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             CustomTextField(
                               labelText: 'enterName'.tr(),
                               keyboardType: TextInputType.text,
-                              controller: nameController,
+                              controller: cubit.nameController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
                             CustomText(text: "phone"),
                             CustomTextField(
                               labelText: 'enterPhone'.tr(),
                               keyboardType: TextInputType.phone,
-                              controller: phoneNumberController,
+                              controller: cubit.phoneNumberController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
                             CustomText(text: "address"),
                             CustomTextField(
                               labelText: 'enterAddress'.tr(),
                               keyboardType: TextInputType.text,
-                              controller: addressController,
+                              controller: cubit.addressController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
                             CustomText(text: "password"),
@@ -128,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     size: 20.h,
                                   )),
                               labelText: 'enterPassword'.tr(),
-                              controller: passwordController,
+                              controller: cubit.passwordController,
                               keyboardType: TextInputType.text,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
@@ -150,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     size: 20.h,
                                   )),
                               labelText: 'enterPassword'.tr(),
-                              controller: passwordConfirmController,
+                              controller: cubit.passwordConfirmController,
                               keyboardType: TextInputType.text,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
@@ -163,20 +158,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 text: "createAccount".tr(),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
-                                    //  cubit.addMember(
-                                    //    context: context,
-                                    //    name: nameController.text,
-                                    //    nationalId: idNumberController.text,
-                                    //    cardDate: idDateController.text,
-                                    //    address: residenceController.text,
-                                    //    phone: phoneNumberController.text,
-                                    //    qualification: educationController.text,
-                                    //    job: jobController.text,
-                                    //    workPlace: workAddressController.text,
-                                    //    partisan: adjectiveController.text,
-                                    //    placeAbroad: outAddressController.text,
-                                    //    passport: passportController.text,
-                                    //  );
+                                    cubit.register(context);
+                                    //cubit.sendOTP(context);
                                   } else {
                                     errorGetBar("من فضلك املأ الحقول");
                                     print('Form is Not valid');

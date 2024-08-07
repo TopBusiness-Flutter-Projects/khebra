@@ -20,9 +20,7 @@ class ServicesType extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 3.w),
         child: Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.w,
-            ),
+            padding: EdgeInsets.symmetric(vertical: 10.h),
             decoration: BoxDecoration(
                 color: isSelected ? AppColors.primary : AppColors.gray1,
                 borderRadius: BorderRadius.all(Radius.circular(50))),
@@ -31,7 +29,7 @@ class ServicesType extends StatelessWidget {
               maxLines: 2,
               textAlign: TextAlign.center,
               style: getRegularStyle(
-                  color: AppColors.white, fontHeight: 1, fontSize: 13.w),
+                  color: AppColors.white, fontHeight: 1, fontSize: 15.sp),
             )));
   }
 }

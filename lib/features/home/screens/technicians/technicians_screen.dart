@@ -2,14 +2,9 @@
 
 import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:khebra/config/routes/app_routes.dart';
-import 'package:khebra/core/utils/assets_manager.dart';
+import 'package:khebra/core/utils/app_export.dart';
 import 'package:khebra/core/widgets/custom_appBar.dart';
-import 'package:khebra/core/widgets/custom_text_form_field.dart';
 import 'package:khebra/features/home/cubit/home_cubit.dart';
 import 'package:khebra/features/home/cubit/home_states.dart';
 import 'package:khebra/features/home/screens/widgets/custom_technicians_container.dart';
@@ -73,34 +68,43 @@ class _TechniciansScreenState extends State<TechniciansScreen> {
                 ),
               ),
               Expanded(
-                child: Form(
-                  key: formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(10.w),
-                            child: StaggeredGrid.count(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 5.w,
-                                crossAxisSpacing: 20.w,
-                                children: List.generate(
-                                  10,
-                                  (index) => CustomTechniciansContainer(
-                                    inHome: false,
-                                    mainText: "AppStringsAppStringsAppStrings",
-                                    containerOnTap: () {
-                                      Navigator.pushNamed(
-                                          context, Routes.techniciansProfile);
-                                    },
+                child: cubit.getAllProviderModel.result == null
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : cubit.getAllProviderModel.result!.isEmpty
+                        ? CustomNoResultsWidget()
+                        : SingleChildScrollView(
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.all(10.w),
+                                    child: StaggeredGrid.count(
+                                        crossAxisCount: 2,
+                                        mainAxisSpacing: 5.w,
+                                        crossAxisSpacing: 20.w,
+                                        children: List.generate(
+                                          cubit.getAllProviderModel.result!
+                                              .length,
+                                          (index) => CustomTechniciansContainer(
+                                            categoryName: cubit
+                                                    .getAllProviderModel
+                                                    .result![index]
+                                                    .name ??
+                                                "",
+                                            name: cubit.getAllProviderModel
+                                                    .result![index].name ??
+                                                "",
+                                            image: cubit.getAllProviderModel
+                                                    .result![index].image1920 ??
+                                                "false",
+                                          ),
+                                        )),
                                   ),
-                                )),
+                                ]),
                           ),
-                        ]),
-                  ),
-                ),
               ),
             ],
           ),

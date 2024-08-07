@@ -131,8 +131,9 @@
    "rates": "التقييمات",
    "rateTechnicians": "تقييم الفني",
    "techniciansProfile": "حساب الفني",
-  
+  "no_result_found": "لا يوجد نتائج",
    "": "",
+   "server_error": "حدث خطأ ما",
  
   "last": ""
 }

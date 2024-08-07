@@ -1,72 +1,54 @@
 // ignore_for_file: use_build_context_synchronously
 
-
-
+import 'package:khebra/core/models/login_model.dart';
 import 'package:khebra/core/remote/service.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../../../core/utils/app_export.dart';
 import 'login_states.dart';
-
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit(this.api) : super(LoginInitialState());
   ServiceApi api;
+  AuthModel? authModel;
 
-  // addMember({
-  //   required BuildContext context,
-  //   String? position,
-  //   String? name,
-  //   String? nationalId,
-  //   String? cardDate,
-  //   String? address,
-  //   String? phone,
-  //   String? qualification,
-  //   String? job,
-  //   String? workPlace,
-  //   String? partisan,
-  //   String? placeAbroad,
-  //   String? passport,
-  // }) async {
+ Future<String> setSessionId(
+      {required String phoneOrMail, required String password}) async {
+    String mySessionId =
+        await api.getSessionId(phone: phoneOrMail, password: password);
 
-  //   AppWidget.createProgressDialog(context, "جاري التحميل");
-  //   emit(LoadingAddMemberState());
-  //   final response = await api.addMember(
-  //     type: genderRadioSelected == 1 ? "male" : "female",
-  //     position: insideRadioSelected == 1 ? "in" : "out",
-  //     imageFront: frontIDFile!.path,
-  //     imageBack: backIDFile!.path,
-  //     image: profileFile!.path,
-  //     // ignore: prefer_null_aware_operators
-  //     cv: cvFille != null ? cvFille!.path : null,
-  //     name: name,
-  //     nationalId: nationalId,
-  //     cardDate: cardDate,
-  //     governorateId: checkGovernmintId,
-  //     address: address,
-  //     phone: phone,
-  //     qualification: qualification,
-  //     job: job,
-  //     workPlace: workPlace,
-  //     partisan: partisan,
-  //     countryId: insideRadioSelected == 1 ? null : checkCoutryId,
-  //     placeAbroad: insideRadioSelected == 1 ? null : placeAbroad,
-  //     passport: insideRadioSelected == 1 ? null : passport,
-  //   );
-  //   response.fold((l) {
-  //     Navigator.pop(context);
-  //     errorGetBar("حدث خطأ");
-  //     emit(FailureAddMemberState());
-  //   }, (r) {
-  //     Navigator.pop(context);
-  //     if (r.status == 1) {
-  //       successGetBar(r.msg);
-  //       Navigator.pushReplacementNamed(context, Routes.homeRoute);
-  //     } else {
-  //       errorGetBar(r.msg!);
-  //     }
+    return mySessionId;
+  }
 
-  //     emit(SuccessAddMemberState());
-  //   });
-  // }
+  login(BuildContext context,
+      {required String phoneOrMail,
+      required String password,
+      bool iSVisitor = false}) async {
+    emit(LoadingLoginState());
+    AppWidget.createProgressDialog(context, 'انتظر');
+    final response = await api.login(phoneOrMail, password);
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(l.message??'');
+      emit(FailureLoginState());
+    }, (r) async {
+      if (r.result != null) {
+        authModel = r;
+        String sessionId =
+            await api.getSessionId(phone: phoneOrMail, password: password);
+        emit(SuccessLoginState());
+        await Preferences.instance.setSessionId(sessionId);
+        if (!iSVisitor) {
+          await Preferences.instance.setUserName(phoneOrMail);
+          await Preferences.instance.setUserPass(password);
+        }
+        Navigator.pop(context);
+        Preferences.instance.setUserId(r.result!.userContext!.uid.toString());
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.mainRoute, (route) => false);
+      } else {
+        errorGetBar("حدث خطأ ما");
+        Navigator.pop(context);
+      }
+    });
+  }
 }

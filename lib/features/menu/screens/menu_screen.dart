@@ -25,6 +25,7 @@ import 'package:khebra/features/menu/cubit/menu_cubit.dart';
 import 'package:khebra/features/menu/cubit/menu_states.dart';
 import 'package:khebra/features/menu/screens/widgets/custom_header_widget.dart';
 import 'package:khebra/features/menu/screens/widgets/custom_settings_widget.dart';
+import 'package:khebra/features/profile/cubit/profile_cubit.dart';
 import '../../../core/widgets/custom_button.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -167,6 +168,15 @@ class _MenuScreenState extends State<MenuScreen> {
                           CustomSettingsRow(
                             text: "logOut",
                             icon: AppIcons.logoutIcon,
+                            onTap: () {
+                              Preferences.instance.removeUserName();
+                              context
+                                  .read<ProfileCubit>()
+                                  .getUserDataModel
+                                  .result = null;
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, Routes.loginRoute, (route) => false);
+                            },
                           ),
                         ]),
                   ),

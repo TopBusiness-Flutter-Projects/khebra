@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:khebra/core/utils/app_export.dart';
 import 'package:khebra/core/utils/app_strings.dart';
 import 'package:khebra/core/utils/assets_manager.dart';
 import 'package:khebra/core/widgets/network_image.dart';
@@ -14,24 +15,31 @@ import '../../../../core/widgets/custom_svg.dart';
 class CustomTechniciansContainer extends StatelessWidget {
   const CustomTechniciansContainer({
     super.key,
-    required this.mainText,
-    this.containerOnTap, this.inHome =true,
+    required this.categoryName,
+    
+    this.inHome = true,
+    this.image,
+    required this.name,
   });
 
-  final void Function()? containerOnTap;
+  
   final bool inHome;
-  final String mainText;
-
+  final String categoryName;
+  final String name;
+  final dynamic image;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: containerOnTap,
+      onTap: () {
+                                      Navigator.pushNamed(
+                                          context, Routes.techniciansProfile);
+                                    },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.h),
         child: Stack(
           children: [
             Container(
-               width:inHome? 120.h :null,
+              width: inHome ? 120.h : null,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
@@ -57,8 +65,9 @@ class CustomTechniciansContainer extends StatelessWidget {
                         border: Border.all(color: Colors.black, width: 2)),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(1000),
-                      child: CustomNetworkImage(
-                        imageUrl: AppStrings.sliderTestImage,
+                      child: DecodedImage(
+                        context: context,
+                        base64String: image,
                         height: 50.h,
                         width: 50.h,
                       ),
@@ -70,7 +79,7 @@ class CustomTechniciansContainer extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 4.h),
                     child: Text(
-                      "mohamedmohamedmohamed" "\n",
+                      "$name\n",
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -86,7 +95,7 @@ class CustomTechniciansContainer extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 4.h),
                     child: Text(
-                      "mohamedmohamedmohamedmohamed" "\n",
+                      "\n",
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,

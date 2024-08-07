@@ -20,11 +20,6 @@ class UpdateProfileScreen extends StatefulWidget {
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordConfirmController = TextEditingController();
   bool isHidden = true;
   bool isHiddenConfirm = true;
   @override
@@ -96,14 +91,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             CustomTextField(
                               labelText: 'enterName'.tr(),
                               keyboardType: TextInputType.text,
-                              controller: nameController,
+                              controller: cubit.nameController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
                             CustomText(text: "phone"),
                             CustomTextField(
                               labelText: 'enterPhone'.tr(),
                               keyboardType: TextInputType.phone,
-                              controller: phoneNumberController,
+                              controller: cubit.phoneNumberController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
                             // CustomText(text: "address"),
@@ -131,7 +126,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     size: 20.h,
                                   )),
                               labelText: 'enterPassword'.tr(),
-                              controller: passwordController,
+                              controller: cubit.passwordController,
                               keyboardType: TextInputType.text,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
@@ -153,7 +148,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     size: 20.h,
                                   )),
                               labelText: 'enterPassword'.tr(),
-                              controller: passwordConfirmController,
+                              controller: cubit.passwordConfirmController,
                               keyboardType: TextInputType.text,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
@@ -166,6 +161,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 text: "update".tr(),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
+                                    cubit.updateProfile(context);
                                     //  cubit.addMember(
                                     //    context: context,
                                     //    name: nameController.text,
@@ -202,5 +198,3 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     );
   }
 }
-
-

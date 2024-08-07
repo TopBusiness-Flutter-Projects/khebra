@@ -132,6 +132,9 @@
 "rates": "Rates",
    "rateTechnicians": "rate the technicians",
    "techniciansProfile": "Technicians profile",
-  "": "",
+  "server_error": "There was an error",
+  "no_result_found": "There was no results",
+   "": "",
+
   "last": ""
 }

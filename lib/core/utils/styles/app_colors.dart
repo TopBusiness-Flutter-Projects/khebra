@@ -14,10 +14,9 @@ class AppColors {
   static Color grey2 = HexColor('#205960');
   static Color grey3 = HexColor('#767676');
   static Color greyText = HexColor('#3D3D3D');
-    static Color greyHint2 = HexColor('#8A8A8A');
-    static Color addServiceContainer = HexColor('#F5ECE0');
+  static Color greyHint2 = HexColor('#8A8A8A');
+  static Color addServiceContainer = HexColor('#F5ECE0');
   static Color checkbox = HexColor('#01A601');
-
   static Color borderColor = HexColor('#979797');
   static Color secondTextColor = HexColor('#373737');
   static Color dotsColor = HexColor('#F5F5F5');

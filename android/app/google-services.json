@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "270338729080",
+    "project_id": "khebra-f94ab",
+    "storage_bucket": "khebra-f94ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270338729080:android:965f4c00b82483af09f98d",
+        "android_client_info": {
+          "package_name": "com.topbusiness.khebra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE2fk4OIIvSMjgAoDWMzdNJXGl6BVU_9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

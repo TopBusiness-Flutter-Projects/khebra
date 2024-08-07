@@ -3,7 +3,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:khebra/config/routes/app_routes.dart';
@@ -13,12 +12,9 @@ import 'package:khebra/core/utils/styles/app_colors.dart';
 import 'package:khebra/core/utils/styles/app_fonts.dart';
 import 'package:khebra/core/widgets/custom_text.dart';
 import 'package:khebra/core/widgets/custom_text_form_field.dart';
-import 'package:khebra/core/widgets/top_business_logo.dart';
 import 'package:khebra/features/login/cubit/login_cubit.dart';
 import 'package:khebra/features/login/cubit/login_states.dart';
-
 import '../../../core/widgets/custom_button.dart';
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -122,9 +118,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: CustomButton(
                                 text: "logIn".tr(),
                                 onPressed: () {
-                                  Navigator.pushNamedAndRemoveUntil(context,
-                                      Routes.mainRoute, (route) => false);
+                                  
                                   if (formKey.currentState!.validate()) {
+                                       cubit.login(context,                                              
+                                                phoneOrMail:
+                                                  phoneNumberController.text,
+                                                password: passwordController.text);
                                   } else {
                                     errorGetBar("من فضلك املأ الحقول");
                                     print('Form is Not valid');

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:khebra/core/models/login_model.dart';
 import 'package:khebra/core/utils/app_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -74,30 +75,81 @@ class Preferences {
   }
   //////////////////////////////////
 
-// set user
-  // Future<void> setUser(LoginModel loginResponse) async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   preferences.setString(
-  //       'user', jsonEncode(LoginModel.fromJson(loginResponse.toJson())));
-  //   print(await getUserModel());
-  // }
-  // Future<void> clearUser() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   preferences.remove('user');
-  //   print(await getUserModel());
-  // }
+  Future<void> setSessionId(String sessionId) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('sessionId', sessionId);
+    print("sessionId = $sessionId");
+  }
 
-  // Future<LoginModel> getUserModel() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   String? jsonData = preferences.getString('user');
-  //   LoginModel userModel;
-  //   if (jsonData != null) {
-  //     userModel = LoginModel.fromJson(jsonDecode(jsonData));
-  //   } else {
-  //     userModel = LoginModel();
-  //   }
-  //   return userModel;
-  // }
+  Future<String?> getSessionId() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? sessionId = preferences.getString('sessionId');
+    return sessionId;
+  }
+
+// set user
+  Future<AuthModel> getUser() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? jsonData = preferences.getString('user2');
+    AuthModel userModel;
+    if (jsonData != null) {
+      userModel = AuthModel.fromJson(jsonDecode(jsonData));
+    } else {
+      userModel = AuthModel();
+    }
+    return userModel;
+  }
+
+  Future<void> setUser(AuthModel authModel) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString(
+        'user2', jsonEncode(AuthModel.fromJson(authModel.toJson())));
+    // print(await getUserModel2());
+  }
+
+// set userId
+
+  Future<void> setUserId(String userId) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('userId', userId);
+    print("userId = $userId");
+  }
+
+
+  Future<String?> getUserId() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? userId = preferences.getString('userId');
+    return userId;
+  }
+
+  Future<void> setUserName(String userName) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('userName', userName);
+   
+  }
+
+  Future<void> removeUserName() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove('userName');
+  }
+
+  Future<String?> getUserName() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? userName = preferences.getString('userName');
+    return userName;
+  }
+
+  Future<void> setUserPass(String userPass) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('userPass', userPass);
+    print("Password = $userPass");
+  }
+
+  Future<String?> getUserPass() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? userPass = preferences.getString('userPass');
+    return userPass;
+  }
 
   Future<void> clearShared() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();

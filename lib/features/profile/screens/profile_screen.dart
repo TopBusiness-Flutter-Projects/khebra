@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           )),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
+                        children: const [
                           CustomWhiteAppBar(
                             title: "myProfile",
                           ),
@@ -62,51 +62,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Positioned(
                       bottom: 0,
                       child: Center(
-                        child: Container(
-                          height: 150.h,
-                          width: MediaQuery.of(context).size.width * .8,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(25),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.1),
-                                blurRadius: 5,
-                                offset: Offset(0, 2), // Shadow position
-                              )
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(1000),
-                                child: CustomNetworkImage(
-                                  imageUrl: AppStrings.testNetworkImage,
-                                  height: 80.w,
-                                  width: 80.w,
+                        child: cubit.getUserDataModel.result == null
+                            ? CircularProgressIndicator()
+                            : Container(
+                                height: 150.h,
+                                width: MediaQuery.of(context).size.width * .8,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(25),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(0, 0, 0, 0.1),
+                                      blurRadius: 5,
+                                      offset: Offset(0, 2), // Shadow position
+                                    )
+                                  ],
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(1000),
+                                      child: DecodedImage(
+                                          base64String: cubit.getUserDataModel
+                                              .result![0].image1920,
+                                          height: 80.w,
+                                          width: 80.w,
+                                          context: context),
+                                    ),
+                                    SizedBox(
+                                      height: 3.h,
+                                    ),
+                                    Text(
+                                      cubit.getUserDataModel.result![0].name ??
+                                          "",
+                                      maxLines: 1,
+                                      style: getBoldStyle(
+                                          color: AppColors.settingFont,
+                                          fontSize: 18.sp),
+                                    ),
+                                    Text(
+                                      cubit.getUserDataModel.result![0].login ??
+                                          "",
+                                      maxLines: 1,
+                                      style: getRegularStyle(
+                                        color: AppColors.primary,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 3.h,
-                              ),
-                              Text(
-                                "AYAA",
-                                maxLines: 1,
-                                style: getBoldStyle(
-                                    color: AppColors.settingFont,
-                                    fontSize: 18.sp),
-                              ),
-                              Text(
-                                "01024585455",
-                                maxLines: 1,
-                                style: getRegularStyle(
-                                  color: AppColors.primary,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                       ),
                     )
                   ],
