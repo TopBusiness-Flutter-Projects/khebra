@@ -1,16 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:khebra/core/utils/app_strings.dart';
-import 'package:khebra/core/utils/assets_manager.dart';
-import 'package:khebra/core/widgets/network_image.dart';
-
-import '../../../../core/utils/custom_svg_icon.dart';
-import '../../../../core/utils/styles/app_colors.dart';
-import '../../../../core/utils/styles/app_fonts.dart';
-import '../../../../core/widgets/custom_svg.dart';
+import 'package:khebra/core/utils/app_export.dart';
 
 class CustomServiceContainer extends StatelessWidget {
   const CustomServiceContainer({
@@ -18,15 +8,17 @@ class CustomServiceContainer extends StatelessWidget {
     required this.mainText,
     this.containerOnTap,
     this.onTap,
-    this.withPrice = false,
+    this.withPrice = true,
+    this.image,
+    required this.listPrice,
   });
 
   final void Function()? containerOnTap;
   final void Function()? onTap;
-
   final String mainText;
+  final double listPrice;
   final bool withPrice;
-
+  final dynamic image;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -50,10 +42,13 @@ class CustomServiceContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CustomNetworkImage(
-                imageUrl: AppStrings.sliderTestImage,
-                height: 100.h,
-                // width: 120.h,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: DecodedImage(
+                  context: context,
+                  base64String: image,
+                  height: 100.h,
+                ),
               ),
               SizedBox(
                 height: 5.h,
@@ -65,7 +60,7 @@ class CustomServiceContainer extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "jhfdjkshfjksbfjkfdsfbdsjfbsddsjfbjdsbfjdj" "\n",
+                        "$mainText\n",
                         textAlign: TextAlign.start,
                         maxLines: 2,
                         style: getBoldStyle(
@@ -77,17 +72,17 @@ class CustomServiceContainer extends StatelessWidget {
                     SizedBox(
                       width: 3.w,
                     ),
-                    Expanded(
-                      child: Text(
-                        "سكة" "\n",
-                        maxLines: 2,
-                        textAlign: TextAlign.end,
-                        style: getRegularStyle(
-                            fontHeight: 1,
-                            color: AppColors.primary,
-                            fontSize: 13.sp),
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: Text(
+                    //     "سكة" "\n",
+                    //     maxLines: 2,
+                    //     textAlign: TextAlign.end,
+                    //     style: getRegularStyle(
+                    //         fontHeight: 1,
+                    //         color: AppColors.primary,
+                    //         fontSize: 13.sp),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -104,7 +99,7 @@ class CustomServiceContainer extends StatelessWidget {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                      text: "200",
+                                      text: listPrice.toString(),
                                       style: getBoldStyle(
                                           fontSize: 15.sp,
                                           color: AppColors.primary)),
@@ -114,7 +109,7 @@ class CustomServiceContainer extends StatelessWidget {
                                           fontSize: 15.sp,
                                           color: AppColors.primary)),
                                   TextSpan(
-                                      text: "currency".tr()+ "\n",
+                                      text: "currency".tr() + "\n",
                                       style: getRegularStyle(
                                           fontSize: 15.sp,
                                           color: AppColors.primary)),
@@ -135,12 +130,15 @@ class CustomServiceContainer extends StatelessWidget {
                           ),
                         ],
                       )
-                    : GestureDetector(
-                        onTap: onTap,
-                        child: Image.asset(
-                          AppImages.bluePlus,
-                          height: 20.w,
-                          width: 20.w,
+                    : Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: GestureDetector(
+                          onTap: onTap,
+                          child: Image.asset(
+                            AppImages.bluePlus,
+                            height: 20.w,
+                            width: 20.w,
+                          ),
                         ),
                       ),
               ),

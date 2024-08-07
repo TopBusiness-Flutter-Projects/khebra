@@ -22,6 +22,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
   @override
   void initState() {
     context.read<HomeCubit>().changeServicesType(true);
+    context.read<HomeCubit>().getAllProductsPrices(isWithPrice: true);
     super.initState();
   }
 
@@ -45,6 +46,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                       child: GestureDetector(
                           onTap: () {
                             cubit.changeServicesType(true);
+                            cubit.getAllProductsPrices(isWithPrice: true);
                             print(cubit.withPriceType);
                           },
                           child: ServicesType(
@@ -55,6 +57,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                       child: GestureDetector(
                           onTap: () {
                             cubit.changeServicesType(false);
+                            cubit.getAllProductsPrices(isWithPrice: false);
                             print(cubit.withPriceType);
                           },
                           child: ServicesType(
@@ -72,27 +75,60 @@ class _ServicesScreenState extends State<ServicesScreen> {
                       children: [
                         Padding(
                           padding: EdgeInsets.all(10.w),
-                          child: StaggeredGrid.count(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 10.w,
-                              crossAxisSpacing: 15.w,
-                              children: cubit.withPriceType
-                                  ? List.generate(
-                                      10,
-                                      (index) => CustomServiceContainer(
-                                        mainText:
-                                            "AppStringsAppStringsAppStrings",
-                                        containerOnTap: () {},
-                                      ),
-                                    )
-                                  : List.generate(
-                                      5,
-                                      (index) => CustomServiceContainer(
-                                        mainText:
-                                            "AppStringsAppStringsAppStrings",
-                                        containerOnTap: () {},
-                                      ),
-                                    )),
+                          child: cubit.withPriceType
+                              ? cubit.productsWithPriceModel == null
+                                  ? Center(child: CircularProgressIndicator())
+                                  : StaggeredGrid.count(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 10.w,
+                                      crossAxisSpacing: 15.w,
+                                      children: List.generate(
+                                        cubit.productsWithPriceModel!.result!
+                                            .length,
+                                        (index) => CustomServiceContainer(
+                                          listPrice: cubit
+                                              .productsWithPriceModel!
+                                              .result![index]
+                                              .listPrice!,
+                                          mainText: cubit
+                                              .productsWithPriceModel!
+                                              .result![index]
+                                              .name!,
+                                          image: cubit.productsWithPriceModel!
+                                              .result![index].image1920,
+                                          containerOnTap: () {},
+                                        ),
+                                      ))
+                              :
+
+                              /// without price
+
+                              cubit.productsWithoutPriceModel == null
+                                  ? Center(child: CircularProgressIndicator())
+                                  : StaggeredGrid.count(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 10.w,
+                                      crossAxisSpacing: 15.w,
+                                      children: List.generate(
+                                        cubit.productsWithoutPriceModel!.result!
+                                            .length,
+                                        (index) => CustomServiceContainer(
+                                          listPrice: cubit
+                                              .productsWithoutPriceModel!
+                                              .result![index]
+                                              .listPrice!,
+                                          mainText: cubit
+                                              .productsWithoutPriceModel!
+                                              .result![index]
+                                              .name!,
+                                          image: cubit
+                                              .productsWithoutPriceModel!
+                                              .result![index]
+                                              .image1920,
+                                          containerOnTap: () {},
+                                          withPrice: false,
+                                        ),
+                                      )),
                         ),
                       ]),
                 ),

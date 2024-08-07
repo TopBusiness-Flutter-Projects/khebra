@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:khebra/config/routes/app_routes.dart';
@@ -10,6 +10,7 @@ import 'package:khebra/core/utils/assets_manager.dart';
 import 'package:khebra/core/utils/styles/app_colors.dart';
 import 'package:khebra/core/utils/styles/app_fonts.dart';
 import 'package:khebra/core/widgets/top_business_logo.dart';
+import 'package:khebra/features/login/cubit/login_cubit.dart';
 import '../../../core/preferences/preferences.dart';
 import '../widgets/custom_logo.dart';
 
@@ -31,20 +32,40 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 3),
       () {
+        String userName = '';
+        String userPass = '';
+
         Preferences.instance.getIsFirstTime(key: 'onBoarding').then((value) {
           if (value != null && value == true) {
-            Navigator.pushReplacementNamed(context, Routes.loginRoute);
-            // Navigator.pushReplacementNamed(context, Routes.homeRoute);
-            // Preferences.instance.getUserToken().then((value) {
-            //   if (value != null) {
-            //     Navigator.pushNamedAndRemoveUntil(
-            //         context, Routes.homeRoute, (route) => false);
-            //     //    context.read<HomeCubit>().getUser();
-            //   } else {
-            //     //  Navigator.pushNamedAndRemoveUntil(
-            //     //      context, Routes.loginRoute, (route) => false);
-            //   }
-            // });
+            Preferences.instance.getUserName().then((value) async {
+              if (value != null) {
+                userName = value;
+
+                Preferences.instance.getUserPass().then((value) async {
+                  if (value != null) {
+                    userPass = value;
+
+                      String session = await context
+                    .read<LoginCubit>()
+                    .setSessionId(phoneOrMail: userName, password: userPass);
+                if (session != "error") {
+                  Navigator.pushReplacementNamed(context, Routes.mainRoute);
+                } else {
+                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                }
+                  }
+                }).catchError((error) {
+                  debugPrint("ffffffffff" + error.toString());
+                });
+
+              
+              } else {
+                Navigator.pushReplacementNamed(context, Routes.loginRoute);
+              }
+            }).catchError((error) {
+              debugPrint("ffffffffff" + error.toString());
+            });
+
             print('not first time');
           } else {
             Navigator.pushReplacementNamed(context, Routes.onBoarding);

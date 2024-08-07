@@ -1,9 +1,8 @@
 // ignore_for_file: use_super_parameters, prefer_const_constructors
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/easy_localization.dart' as easy;
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:khebra/config/routes/app_routes.dart';
@@ -11,21 +10,16 @@ import 'package:khebra/core/utils/assets_manager.dart';
 import 'package:khebra/core/utils/dialogs.dart';
 import 'package:khebra/core/utils/styles/app_colors.dart';
 import 'package:khebra/core/utils/styles/app_fonts.dart';
-import 'package:khebra/core/widgets/custom_text.dart';
-import 'package:khebra/core/widgets/custom_text_form_field.dart';
-import 'package:khebra/core/widgets/top_business_logo.dart';
 import 'package:khebra/features/forgetPassword/cubit/forget_password_cubit.dart';
 import 'package:khebra/features/forgetPassword/cubit/forget_password_states.dart';
 import 'package:khebra/features/forgetPassword/screens/widgets/PinOTP.dart';
-
 import 'package:khebra/features/register/cubit/register_cubit.dart';
-import 'package:khebra/features/register/cubit/register_states.dart';
 
 import '../../../core/widgets/custom_button.dart';
 
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({Key? key}) : super(key: key);
-
+  const OTPScreen({Key? key, this.isRegister = true}) : super(key: key);
+  final bool isRegister;
   @override
   State<OTPScreen> createState() => _OTPScreenState();
 }
@@ -93,6 +87,15 @@ class _OTPScreenState extends State<OTPScreen> {
                             ),
                             PinOTP(
                               textEditingController: otpController,
+                              onCompleted: (v) {
+                                debugPrint("Completed");
+                                widget.isRegister
+                                    ? context
+                                        .read<RegisterCubit>()
+                                        .verifyOtp(otpController.text, context)
+                                    : Navigator.pushNamed(
+                                        context, Routes.newPasswordScreenRoute);
+                              },
                             ),
                             SizedBox(
                               height: 15.h,
@@ -105,8 +108,11 @@ class _OTPScreenState extends State<OTPScreen> {
                               child: CustomButton(
                                 text: "next".tr(),
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, Routes.newPasswordScreenRoute);
+                                  widget.isRegister
+                                      ? context.read<RegisterCubit>().verifyOtp(
+                                          otpController.text, context)
+                                      : cubit.verifyOtp(
+                                          otpController.text, context);
                                   if (formKey.currentState!.validate()) {
                                     //  cubit.addMember(
                                     //    context: context,

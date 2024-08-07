@@ -59,17 +59,25 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          SizedBox(
+                            height: 20.h,
+                          ),
                           Padding(
                             padding: EdgeInsets.all(10.w),
                             child: StaggeredGrid.count(
                                 crossAxisCount: 3,
-                                mainAxisSpacing: 5.w,
-                                crossAxisSpacing: 5.w,
+                                mainAxisSpacing: 30.w,
+                                crossAxisSpacing: 10.w,
                                 children: List.generate(
-                                  10,
+                                  cubit.categoriesModel!.result!.length,
                                   (index) => CustomCategoriesContainer(
-                                    containerOnTap: () {},
-                                    mainText: "AppStrings.collectPoints",
+                                    categoryId: cubit
+                                        .categoriesModel!.result![index].id!,
+                                    image: cubit
+                                        .categoriesModel!.result![index].image,
+                                    mainText: cubit.categoriesModel!
+                                            .result![index].name ??
+                                        "",
                                   ),
                                 )),
                           ),

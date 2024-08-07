@@ -8,9 +8,10 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 class PinOTP extends StatefulWidget {
   const PinOTP({
     super.key,
-    required this.textEditingController,
+    required this.textEditingController, this.onCompleted,
   });
   final TextEditingController textEditingController;
+ final void Function(String)? onCompleted;
 
   @override
   State<PinOTP> createState() => _PinOTPState();
@@ -52,8 +53,6 @@ class _PinOTPState extends State<PinOTP> {
           animationType: AnimationType.fade,
           //validator: (value) => value!.isEmpty ? '' : null,
           pinTheme: PinTheme(
-
-            
               activeColor: AppColors.grey3,
               activeFillColor: AppColors.white,
               inactiveColor: AppColors.grey3,
@@ -74,9 +73,7 @@ class _PinOTPState extends State<PinOTP> {
           //     blurRadius: 10,
           //   )
           // ],
-          onCompleted: (v) {
-            debugPrint("Completed");
-          },
+          onCompleted: widget.onCompleted,
           // onTap: () {
           //   print("Pressed");
           // },

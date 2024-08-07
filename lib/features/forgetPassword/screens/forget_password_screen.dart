@@ -107,8 +107,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               child: CustomButton(
                                 text: "send".tr(),
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, Routes.otpScreenRoute);
+                                  cubit.sendOTP(context);
                                   if (formKey.currentState!.validate()) {
                                     //  cubit.addMember(
                                     //    context: context,

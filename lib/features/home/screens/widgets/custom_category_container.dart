@@ -1,28 +1,38 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:khebra/core/utils/app_strings.dart';
-import 'package:khebra/core/widgets/network_image.dart';
+import 'package:khebra/core/models/all_products_model.dart';
+import 'package:khebra/core/utils/app_export.dart';
+import 'package:khebra/features/home/cubit/home_cubit.dart';
 
-import '../../../../core/utils/custom_svg_icon.dart';
-import '../../../../core/utils/styles/app_colors.dart';
-import '../../../../core/utils/styles/app_fonts.dart';
-import '../../../../core/widgets/custom_svg.dart';
+import '../servicies_of_category_screen.dart';
 
 class CustomCategoriesContainer extends StatelessWidget {
   const CustomCategoriesContainer({
     super.key,
     required this.mainText,
     this.containerOnTap,
+    this.image,
+    required this.categoryId,
   });
 
   final void Function()? containerOnTap;
 
   final String mainText;
+  final dynamic image;
+  final int categoryId;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: containerOnTap,
+      onTap: () {
+        context.read<HomeCubit>().productsOfCategoryModel = AllProductsModel();
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ServicesOfCategoryScreen(
+                categoryId: categoryId,
+                categoryName: mainText,
+              ),
+            ));
+      },
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -40,8 +50,9 @@ class CustomCategoriesContainer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomNetworkImage(
-                imageUrl: AppStrings.testNetworkImage,
+              DecodedImage(
+                context: context,
+                base64String: image,
                 height: 50.h,
                 width: 50.h,
               ),

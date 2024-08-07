@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:khebra/core/utils/app_strings.dart';
-import 'package:khebra/core/widgets/network_image.dart';
+
+import 'package:khebra/features/home/cubit/home_cubit.dart';
 
 import 'custom_category_container.dart';
 
@@ -14,22 +14,19 @@ class CategoriesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeCubit cubit = context.read<HomeCubit>();
     return StaggeredGrid.count(
         crossAxisCount: 3,
         mainAxisSpacing: 5.w,
         crossAxisSpacing: 5.w,
-        //   GridView.count(
-        // shrinkWrap: true,
-        // physics: const NeverScrollableScrollPhysics(),
-        // crossAxisCount: 4,
-        // mainAxisSpacing: 5.w,
-        // crossAxisSpacing: 5.w,
-        // childAspectRatio: 1 / 2,
         children: List.generate(
-          6,
+          cubit.categoriesModel!.result!.length >= 6
+              ? 6
+              : cubit.categoriesModel!.result!.length,
           (index) => CustomCategoriesContainer(
-            containerOnTap: () {},
-            mainText: "AppStrings.collectPoints",
+            categoryId: cubit.categoriesModel!.result![index].id!,
+            image: cubit.categoriesModel!.result![index].image,
+            mainText: cubit.categoriesModel!.result![index].name ?? "",
           ),
         ));
   }
