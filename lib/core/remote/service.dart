@@ -137,8 +137,8 @@ class ServiceApi {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+
   Future<Either<Failure, DefaultModel>> updateProfile({
-    
     required String image,
     //required String address,
     required String mobile,
@@ -148,7 +148,9 @@ class ServiceApi {
     try {
       final response = await dio.put(EndPoints.updatePartner,
           options: Options(
-            headers: {"Cookie": "session_id=3ffb870cac23ecc333fe57c3248dc7c8ebbcad47"},
+            headers: {
+              "Cookie": "session_id=3ffb870cac23ecc333fe57c3248dc7c8ebbcad47"
+            },
           ),
           body: {
             "params": {
@@ -162,7 +164,6 @@ class ServiceApi {
               "data": {
                 "image_medium": image, //base_64
                 "mobile": "$mobile"
-               
               }
             }
           });
@@ -274,20 +275,82 @@ class ServiceApi {
   }
 
   Future<Either<Failure, GetAllProviderModel>> getProviders(
-     // int page, int pageSize
+      // int page, int pageSize
       ) async {
     try {
-     
-
       String? sessionId = await Preferences.instance.getSessionId();
       final response = await dio.get(
         EndPoints.getProviders,
-         //+'&page_size=$pageSize&page=$page',
+        //+'&page_size=$pageSize&page=$page',
         options: Options(
           headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
         ),
       );
       return Right(GetAllProviderModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, GetAllProviderModel>> getProvidersWithFilters(
+      {required String level, required String categoryId}) async {
+    try {
+      String? sessionId = await Preferences.instance.getSessionId();
+      final response = await dio.get(
+        EndPoints.getProvidersWithFilters +
+            'filter=[["user_type","=","provider"],["level","=","$level"],["specialization_id","=",$categoryId]]',
+        //+'&page_size=$pageSize&page=$page',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetAllProviderModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  /// ADD SERVICE
+
+  Future<Either<Failure, DefaultModel>> addService({
+    required String categoryId,
+    required String serviceId,
+    required String providerId,
+    required String level,
+    required String servicePrice,
+    required String totalPrice,
+    required String qty,
+    required String date,
+    required List<String> images,
+  }) async {
+    String? sessionId = await Preferences.instance.getSessionId();
+    String userId = await Preferences.instance.getUserId() ?? "1";
+    print(images);
+
+    try {
+      final response = await dio.post(EndPoints.addService,
+          options: Options(
+            headers: {"Cookie": "session_id=$sessionId"},
+          ),
+          body: {
+            "params": {
+              "data": {
+                "client_id": userId,
+                "category_id": categoryId, //sebaka
+                "service_id": serviceId, // tarkeb
+                "provider_id": providerId,
+                "service_price": servicePrice,
+                "total_price": totalPrice,
+                "quantity": qty,
+                "level": level,
+                "date": date,
+              //  "attachment_ids": images
+              }
+            }
+          }).onError((error, stackTrace) {
+        print(error.toString());
+      });
+      return Right(DefaultModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

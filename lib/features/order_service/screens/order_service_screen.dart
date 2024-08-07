@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:khebra/config/routes/app_routes.dart';
+import 'package:khebra/core/models/all_products_model.dart';
 import 'package:khebra/core/utils/assets_manager.dart';
 import 'package:khebra/core/utils/dialogs.dart';
 import 'package:khebra/core/utils/styles/app_colors.dart';
@@ -38,13 +39,18 @@ class OrderServiceScreen extends StatefulWidget {
 class _OrderServiceScreenState extends State<OrderServiceScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  TextEditingController searchController = TextEditingController();
-
   @override
   void initState() {
     context.read<OrderServiceCubit>().uploadedImage.clear();
-    context.read<OrderServiceCubit>().selectedDate = DateFormat('yyyy-MM-dd')
-        .format(DateTime.parse(DateTime.now().toString()));
+    context.read<OrderServiceCubit>().uploadedImageStrings.clear();
+    // context.read<OrderServiceCubit>().selectedDate = DateFormat('yyyy-MM-dd')
+    //     .format(DateTime.parse(DateTime.now().toString()));
+    context.read<OrderServiceCubit>().getAllCategories();
+    context.read<OrderServiceCubit>().productsOfCategoryModel =
+        AllProductsModel();
+    context.read<OrderServiceCubit>().selectedExperience = null;
+    context.read<OrderServiceCubit>().serviceQty = 1;
+    context.read<OrderServiceCubit>().totalServicePrices = 0;
     super.initState();
   }
 
@@ -100,7 +106,20 @@ class _OrderServiceScreenState extends State<OrderServiceScreen> {
                               text: "selectTime",
                             ),
                             CustomTimeSection(),
-                            CustomTotalWidget()
+                            if (cubit.servicePrice != 0) CustomTotalWidget(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomButton(
+                                  text: "order_now",
+                                  onPressed: () {
+                                    cubit.getProviders(
+                                      context,
+                                    );
+                                  }),
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            )
                           ]),
                     ),
                   ),
@@ -125,104 +144,115 @@ class CustomTotalWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(18.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.1),
-              blurRadius: 2,
-              offset: Offset(0, 5), // Shadow position
-            )
-          ],
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: RichText(
-                  maxLines: 2,
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: "total".tr() + ": ",
-                          style: getBoldStyle(
-                            color: AppColors.secondTextColor,
-                          )),
-                      TextSpan(
-                          text: "600",
-                          style: getBoldStyle(
-                            color: AppColors.secondTextColor,
-                          )),
-                      TextSpan(
-                          text: ' ',
-                          style: getBoldStyle(
-                            fontSize: 15.sp,
-                          )),
-                      TextSpan(
-                          text: "currency".tr(),
-                          style: getRegularStyle(
-                            color: AppColors.secondTextColor,
-                          )),
-                    ],
-                  ),
-                ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: EdgeInsets.all(
-                          3.w,
-                        ),
-                        child: Icon(
-                          Icons.add,
-                          color: AppColors.white,
-                          size: 20.sp,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 8.w),
-                  Text("3",
-                      style: getBoldStyle(
-                          color: AppColors.primary, fontHeight: 1.3)),
-                  SizedBox(width: 8.w),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: EdgeInsets.all(
-                          3.w,
-                        ),
-                        child: Icon(
-                          Icons.remove,
-                          color: AppColors.white,
-                          size: 20.sp,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+    OrderServiceCubit cubit = context.read<OrderServiceCubit>();
+
+    return BlocBuilder<OrderServiceCubit, OrderServiceStates>(
+        builder: (context, state) {
+      return Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.1),
+                blurRadius: 2,
+                offset: Offset(0, 5), // Shadow position
               )
             ],
           ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: RichText(
+                    maxLines: 2,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: "total".tr() + ": ",
+                            style: getBoldStyle(
+                              color: AppColors.secondTextColor,
+                            )),
+                        TextSpan(
+                            text: cubit.totalServicePrices.toString(),
+                            style: getBoldStyle(
+                              color: AppColors.secondTextColor,
+                            )),
+                        TextSpan(
+                            text: ' ',
+                            style: getBoldStyle(
+                              fontSize: 15.sp,
+                            )),
+                        TextSpan(
+                            text: "currency".tr(),
+                            style: getRegularStyle(
+                              color: AppColors.secondTextColor,
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        cubit.changeServiceQty(cubit.serviceQty + 1);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Padding(
+                          padding: EdgeInsets.all(
+                            3.w,
+                          ),
+                          child: Icon(
+                            Icons.add,
+                            color: AppColors.white,
+                            size: 20.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8.w),
+                    Text(cubit.serviceQty.toString(),
+                        style: getBoldStyle(
+                            color: AppColors.primary, fontHeight: 1.3)),
+                    SizedBox(width: 8.w),
+                    GestureDetector(
+                      onTap: () {
+                        if (cubit.serviceQty > 1) {
+                          cubit.changeServiceQty(cubit.serviceQty - 1);
+                        }
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Padding(
+                          padding: EdgeInsets.all(
+                            3.w,
+                          ),
+                          child: Icon(
+                            Icons.remove,
+                            color: AppColors.white,
+                            size: 20.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

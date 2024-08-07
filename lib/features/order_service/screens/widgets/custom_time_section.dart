@@ -18,7 +18,6 @@ class CustomTimeSection extends StatelessWidget {
       padding: EdgeInsets.all(MediaQuery.of(context).size.width / 50),
       child: Wrap(
         alignment: WrapAlignment.center,
-
         direction: Axis.horizontal,
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -28,7 +27,6 @@ class CustomTimeSection extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   print("object");
-
                   cubit.changeSelecttime(e);
                 },
                 child: CustomTimeContainer(

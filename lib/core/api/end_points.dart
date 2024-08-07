@@ -15,6 +15,8 @@ class EndPoints {
   static String allCategoryProducts = '$baseUrl/api/product.product/';
   static String getProviders =
       '$baseUrl/api/res.users?query={id, name,partner_id,image_1920}&filter=[["user_type","=","provider"]]';
+  static String getProvidersWithFilters =
+      '$baseUrl/api/res.users?query={id, name,partner_id,image_1920}&';
   static String getAllPartners = '$baseUrl/api/res.partner?';
   // '$baseUrl/api/res.partner?query={name,id, phone,total_overdue,total_due,total_invoiced,sale_order_ids,credit_to_invoice}';
   static String getUserData =
@@ -35,6 +37,7 @@ class EndPoints {
       '$baseUrl//api/stock.location/?query={id,name}&filter=[["usage", "=", "internal"]]';
 
   static String saleOrder = '$baseUrl/api/sale.order/';
+  static String addService = '$baseUrl/api/order/';
   static String wareHouse = '$baseUrl/api/stock.warehouse/';
   static String saleOrderLine = '$baseUrl/api/sale.order.line';
   static String getSaleOrder = '$baseUrl/api/sale.order/';

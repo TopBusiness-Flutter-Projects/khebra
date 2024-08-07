@@ -37,33 +37,26 @@ class _CustomExperiencesMenuState extends State<CustomExperiencesMenu> {
             //  cubit.countriestModel!.data != null
             //     ?
             CustomDropDownMenu(
-                text: "selectTheExperience".tr(),
-                dropdownValue: dropdownValue,
-                onChanged: (String? value) {
-                  setState(() {
-                    dropdownValue = value!;
-                  });
-                  // cubit.setCoutrytId(value!);
-                },
-                items: [
-              DropdownMenuItem<String>(
-                value: "id",
-                child: Text(
-                  "name",
-                  style: getMediumStyle(),
+          text: "selectTheExperience".tr(),
+          dropdownValue: cubit.selectedExperience,
+          onChanged: (String? value) {
+            setState(() {
+              dropdownValue = value!;
+            });
+            cubit.changeExperience(value!);
+          },
+          items: cubit.experienceList
+              .map(
+                (e) => DropdownMenuItem<String>(
+                  value: e,
+                  child: Text(
+                    e,
+                    style: getMediumStyle(),
+                  ),
                 ),
               )
-            ]
-
-                //  cubit.countriestModel!.data!
-                //     .map(
-                //       (e) => DropdownMenuItem<String>(
-                //         value: e.id.toString(),
-                //         child: Text(e.name!,style: getMediumStyle(),),
-                //       ),
-                //     )
-                //     .toList(),
-                )
+              .toList(),
+        )
             // : SizedBox(
             //     height: MediaQuery.of(context).size.width / 22,
             //   )

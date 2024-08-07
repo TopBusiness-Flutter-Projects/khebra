@@ -33,41 +33,31 @@ class _CustomServiceTypesMenuState extends State<CustomServiceTypesMenu> {
     return BlocConsumer<OrderServiceCubit, OrderServiceStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        return
-            //  cubit.countriestModel!.data != null
-            //     ?
-            CustomDropDownMenu(
+        return cubit.productsOfCategoryModel.result != null
+            ? CustomDropDownMenu(
                 text: "selectService".tr(),
-                dropdownValue: dropdownValue,
+                dropdownValue: cubit.selectedServiceId,
                 onChanged: (String? value) {
-                  setState(() {
-                    dropdownValue = value!;
-                  });
-                  // cubit.setCoutrytId(value!);
-                },
-                items: [
-              DropdownMenuItem<String>(
-                value: "id",
-                child: Text(
-                  "name",
-                  style: getMediumStyle(),
-                ),
-              )
-            ]
+                  final selectedService = cubit.productsOfCategoryModel.result!
+                      .firstWhere((item) => item.id.toString() == value);
 
-                //  cubit.countriestModel!.data!
-                //     .map(
-                //       (e) => DropdownMenuItem<String>(
-                //         value: e.id.toString(),
-                //         child: Text(e.name!,style: getMediumStyle(),),
-                //       ),
-                //     )
-                //     .toList(),
-                )
-            // : SizedBox(
-            //     height: MediaQuery.of(context).size.width / 22,
-            //   )
-            ;
+                  cubit.changeServiceId(value!, selectedService.listPrice!);
+                },
+                items: cubit.productsOfCategoryModel.result!
+                    .map(
+                      (e) => DropdownMenuItem<String>(
+                        value: e.id.toString(),
+                        child: Text(
+                          e.name!,
+                          style: getMediumStyle(),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              )
+            : SizedBox(
+                height: MediaQuery.of(context).size.width / 22,
+              );
       },
     );
   }
